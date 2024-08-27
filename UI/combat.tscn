@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh7vi0wqpxt83"]
+
+[ext_resource type="Script" path="res://UI/combat.gd" id="1_r4n82"]
+
+[node name="Combat" type="CanvasLayer"]
+script = ExtResource("1_r4n82")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -101.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Attack" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack"
+icon_alignment = 1
+
+[node name="Magic" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Magic"
+
+[node name="Talk" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Talk"
+
+[node name="Flee" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Flee"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]

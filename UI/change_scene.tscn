@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://14wp1qqc2yeq"]
+
+[ext_resource type="Script" path="res://UI/change_scene.gd" id="1_11tko"]
+
+[node name="change_scene" type="Button"]
+offset_right = 138.0
+offset_bottom = 43.0
+text = "NaN"
+script = ExtResource("1_11tko")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

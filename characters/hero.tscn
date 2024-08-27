@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0va8dkg8dxxk"]
+
+[ext_resource type="PackedScene" uid="uid://bb7mpuwqkt0l7" path="res://characters/character_root.tscn" id="1_l8sgv"]
+[ext_resource type="Texture2D" uid="uid://cxu30psiungoa" path="res://icon.svg" id="2_my86e"]
+[ext_resource type="Script" path="res://characters/hero.gd" id="3_qvbqi"]
+
+[node name="Hero" instance=ExtResource("1_l8sgv")]
+texture = ExtResource("2_my86e")
+offset = Vector2(0, -64)
+script = ExtResource("3_qvbqi")

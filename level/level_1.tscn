@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://c08wemc7gcmcs"]
+
+[ext_resource type="PackedScene" uid="uid://ca1dl1df1sg8h" path="res://level/level_root.tscn" id="1_57yhp"]
+[ext_resource type="Script" path="res://level/level_1.gd" id="1_f6wdp"]
+[ext_resource type="PackedScene" uid="uid://14wp1qqc2yeq" path="res://UI/change_scene.tscn" id="3_y0ncs"]
+
+[node name="level_1" instance=ExtResource("1_57yhp")]
+script = ExtResource("1_f6wdp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
+offset_left = 27.0
+offset_top = 79.0
+offset_right = 370.0
+offset_bottom = 209.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="a_number" type="Label" parent="VBoxContainer" index="0"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="increment" type="Button" parent="VBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Increment"
+
+[node name="change_scene" parent="." index="1" instance=ExtResource("3_y0ncs")]
+offset_left = 729.0
+offset_top = 251.0
+offset_right = 867.0
+offset_bottom = 294.0
+text = "Next Level"
+level_name = "level_2"
+data = {
+"name": "Another test"
+}
+scene_persist = true
+
+[node name="battle" parent="." index="2" instance=ExtResource("3_y0ncs")]
+offset_left = 731.0
+offset_top = 330.0
+offset_right = 869.0
+offset_bottom = 373.0
+text = "Battle"
+level_name = "/battle/grass_level_battle"
+data = {
+"enemies": ["res://characters/red.tscn", "res://characters/red.tscn"]
+}
+scene_persist = true
+
+[connection signal="pressed" from="VBoxContainer/increment" to="." method="increment_button"]
+[connection signal="change_scene" from="change_scene" to="." method="change_scene"]
+[connection signal="change_scene" from="battle" to="." method="change_scene"]

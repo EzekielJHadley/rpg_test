@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci7dwyv8em8lw"]
+
+[ext_resource type="Script" path="res://level/level_2.gd" id="1_goqmr"]
+[ext_resource type="PackedScene" uid="uid://ca1dl1df1sg8h" path="res://level/level_root.tscn" id="1_o1gip"]
+
+[node name="level_2" instance=ExtResource("1_o1gip")]
+script = ExtResource("1_goqmr")
+
+[node name="Label" type="Label" parent="." index="0"]
+offset_left = 359.0
+offset_top = 92.0
+offset_right = 751.0
+offset_bottom = 151.0
+text = "Place Holder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." index="1"]
+offset_left = 499.0
+offset_top = 219.0
+offset_right = 626.0
+offset_bottom = 262.0
+text = "Back"
+
+[connection signal="pressed" from="Button" to="." method="go_back"]

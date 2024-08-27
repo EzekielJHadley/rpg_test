@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgweu347b7he5"]
+
+[ext_resource type="PackedScene" uid="uid://ca1dl1df1sg8h" path="res://level/level_root.tscn" id="1_tsudi"]
+[ext_resource type="Script" path="res://level/battle/battle_root.gd" id="2_tb2gw"]
+[ext_resource type="PackedScene" uid="uid://bh7vi0wqpxt83" path="res://UI/combat.tscn" id="3_3rjys"]
+[ext_resource type="PackedScene" uid="uid://cr1rqgfr5xtk4" path="res://UI/selector.tscn" id="4_rerfx"]
+
+[node name="battle_root" instance=ExtResource("1_tsudi")]
+script = ExtResource("2_tb2gw")
+
+[node name="fighters" type="Node" parent="." index="0"]
+
+[node name="Enemies" type="Node" parent="fighters" index="0"]
+
+[node name="enemy0" type="Marker2D" parent="fighters/Enemies" index="0"]
+position = Vector2(364, 306)
+
+[node name="enemy1" type="Marker2D" parent="fighters/Enemies" index="1"]
+position = Vector2(128, 460)
+
+[node name="enemy2" type="Marker2D" parent="fighters/Enemies" index="2"]
+position = Vector2(110, 141)
+
+[node name="Allies" type="Node" parent="fighters" index="1"]
+
+[node name="player0" type="Marker2D" parent="fighters/Allies" index="0"]
+position = Vector2(812, 282)
+
+[node name="player1" type="Marker2D" parent="fighters/Allies" index="1"]
+position = Vector2(961, 429)
+
+[node name="player2" type="Marker2D" parent="fighters/Allies" index="2"]
+position = Vector2(957, 133)
+
+[node name="Combat" parent="." index="1" instance=ExtResource("3_3rjys")]
+visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Selector" parent="." index="2" instance=ExtResource("4_rerfx")]
+visible = false
+position = Vector2(364, 306)
+
+[connection signal="attack" from="Combat" to="." method="use_attack_action"]

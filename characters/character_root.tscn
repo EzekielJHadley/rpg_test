@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb7mpuwqkt0l7"]
+
+[ext_resource type="Script" path="res://characters/character_root.gd" id="1_unk6p"]
+
+[node name="character_root" type="Sprite2D"]
+script = ExtResource("1_unk6p")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -64.0
+offset_top = 20.0
+offset_right = 64.0
+offset_bottom = 52.0
+step = 1.0
+value = 50.0
+show_percentage = false
