@@ -13,3 +13,5 @@ offset_bottom = 52.0
 step = 1.0
 value = 50.0
 show_percentage = false
+
+[node name="interupts" type="Node2D" parent="."]

@@ -1,7 +1,7 @@
 extends Character
 
 func _ready():
-	stats = Stats.new(10, 2)
+	stats = Stats.new(name, 10, 2, "res://icon.svg")
 
 func start_turn(_character_list: Dictionary):
 	await super(_character_list)

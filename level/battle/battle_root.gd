@@ -5,6 +5,7 @@ var current_target: Dictionary = {"index":0, "target":null, "team":"Enemies"}
 var character_list: Dictionary = {"Allies":[], "Enemies":[]}
 var turn_order: Array = []
 var num_fighters: Dictionary = {"Allies":0, "Enemies":0}
+var interupt: bool = false
 
 func _ready() -> void:
 	add_players()
@@ -25,6 +26,9 @@ func battle_loop():
 			if fighter.is_alive():
 				fighter.start_turn(character_list)
 				await fighter.End_turn
+				if interupt:
+					await $Combat.finished
+					interupt = false
 		calc_turn_order()
 		if num_fighters["Enemies"] <= 0:
 			print("Heros WIN!")
@@ -42,7 +46,7 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 	match event_type:
 		#1) player turn
 		"player_turn":
-			$Combat.visible = true
+			$Combat.display(event_type, {})
 			$Selector.visible = true
 			current_char = character
 			print("Player's turn")
@@ -64,6 +68,9 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 			index = turn_order.find(character)
 			character.visible = false
 			retarget()
+		"dialogue":
+			$Combat.display(event_type, data)
+			interupt = true
 		_:
 			print("ERROR, should not get here")
 	#2) text interupts
@@ -104,8 +111,8 @@ func calc_turn_order():
 
 func use_attack_action():
 	$Selector.visible = false
-	current_char.attack(current_target["target"])
 	$Combat.visible = false
+	current_char.attack(current_target["target"])
 
 func retarget():
 	if current_target["target"] in character_list[current_target["team"]]:

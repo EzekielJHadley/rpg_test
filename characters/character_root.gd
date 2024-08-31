@@ -26,6 +26,14 @@ func attack(target):
 func take_dmg(attk: Dictionary):
 	stats.HP -= attk["dmg"]
 	update_health_bar()
+	
+	for inter: Interupt in $interupts.get_children():
+		if inter.is_triggered(stats):
+			print("triggered interupt: " + inter.name)
+			var inter_type = inter.interupt_type()
+			var inter_data = inter.interupt_data()
+			Event.emit(self, inter_type, inter_data)
+	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})
 		

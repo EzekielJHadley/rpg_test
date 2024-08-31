@@ -5,38 +5,67 @@
 [node name="Combat" type="CanvasLayer"]
 script = ExtResource("1_r4n82")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 12
-anchor_top = 1.0
+[node name="combat_box" type="HBoxContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.79
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -101.0
+offset_top = -0.920013
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Player_actions" type="VBoxContainer" parent="combat_box"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 alignment = 1
 
-[node name="Attack" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Attack" type="Button" parent="combat_box/Player_actions"]
 layout_mode = 2
 text = "Attack"
 icon_alignment = 1
 
-[node name="Magic" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Magic" type="Button" parent="combat_box/Player_actions"]
 layout_mode = 2
 disabled = true
 text = "Magic"
 
-[node name="Talk" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Talk" type="Button" parent="combat_box/Player_actions"]
 layout_mode = 2
 disabled = true
 text = "Talk"
 
-[node name="Flee" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Flee" type="Button" parent="combat_box/Player_actions"]
 layout_mode = 2
 disabled = true
 text = "Flee"
 
-[connection signal="pressed" from="HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
+[node name="dialogue" type="HBoxContainer" parent="combat_box"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speaker_portrait" type="TextureRect" parent="combat_box/dialogue"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="combat_box/dialogue"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speaker" type="RichTextLabel" parent="combat_box/dialogue/VBoxContainer"]
+layout_mode = 2
+text = "Player_name placeholder"
+fit_content = true
+
+[node name="conversation" type="RichTextLabel" parent="combat_box/dialogue/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+drag_and_drop_selection_enabled = false
+visible_characters_behavior = 1
+
+[connection signal="pressed" from="combat_box/Player_actions/Attack" to="." method="_on_attack_pressed"]
