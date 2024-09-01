@@ -7,8 +7,10 @@ var dialogue: Dictionary = {}
 func _ready():
 	instances += 1
 	name = "Red"+str(instances)
-	stats = Stats.new(name, 5, 1, "res://red.png")
+	stats = Stats.new(name, 5, 1, 2, "res://red.png")
 	texture = load(stats.SPRITE)
+	vulnerability.append("ice")
+	resistant.append("fire")
 
 func _exit_tree() -> void:
 	instances = max(instances - 1, 0)

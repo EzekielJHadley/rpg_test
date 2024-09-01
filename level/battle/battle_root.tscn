@@ -41,3 +41,4 @@ visible = false
 position = Vector2(364, 306)
 
 [connection signal="attack" from="Combat" to="." method="use_attack_action"]
+[connection signal="magic_attack" from="Combat" to="." method="use_magic_attack"]
