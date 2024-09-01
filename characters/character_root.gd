@@ -4,6 +4,10 @@ class_name Character
 signal Event(character: Character, event_type: String, data: Dictionary)
 signal End_turn
 
+var vulnerability: Array = []
+var resistant: Array = []
+var immune: Array = []
+
 var stats: Stats:
 	set(value):
 		stats = value
@@ -17,15 +21,34 @@ func end_turn():
 	End_turn.emit()
 
 
-func attack(target):
+func attack(target: Character):
 	print(name + " is attacking")
 	var atk_info = stats.base_attk()
 	var base_attk = {"target":target, "data":atk_info}
 	Event.emit(self, "attack", base_attk)
 	
+func magic_attack(target: Character, spell: String):
+	print(name + " is using: " + spell)
+	#get spell scene, add to scene
+	#await spell animation
+	var atk_info = stats.magic_attk(spell)
+	var magic_attk = {"target":target, "data":atk_info}
+	Event.emit(self, "attack", magic_attk)
+	
 func take_dmg(attk: Dictionary):
-	stats.HP -= attk["dmg"]
+	var dmg_taken = attk["dmg"]
+	if attk["type"] in vulnerability:
+		dmg_taken *= 2
+	elif attk["type"] in resistant:
+		dmg_taken = floor(dmg_taken/2.0)
+	elif attk["type"] in immune or attk["type"] == "null":
+		dmg_taken = 0
+	stats.HP -= dmg_taken
 	update_health_bar()
+	
+	if stats.HP <= 0:
+		Event.emit(self, "dead", {})
+		return
 	
 	for inter: Interupt in $interupts.get_children():
 		if inter.is_triggered(stats):
@@ -33,9 +56,6 @@ func take_dmg(attk: Dictionary):
 			var inter_type = inter.interupt_type()
 			var inter_data = inter.interupt_data()
 			Event.emit(self, inter_type, inter_data)
-	
-	if stats.HP <= 0:
-		Event.emit(self, "dead", {})
 		
 func character_dead():
 	queue_free()

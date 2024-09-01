@@ -46,6 +46,7 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 	match event_type:
 		#1) player turn
 		"player_turn":
+			$Combat.add_spells(character.stats.spells_available.keys())
 			$Combat.display(event_type, {})
 			$Selector.visible = true
 			current_char = character
@@ -113,6 +114,11 @@ func use_attack_action():
 	$Selector.visible = false
 	$Combat.visible = false
 	current_char.attack(current_target["target"])
+
+func use_magic_attack(spell_name: String):
+	$Selector.visible = false
+	$Combat.visible = false
+	current_char.magic_attack(current_target["target"], spell_name)
 
 func retarget():
 	if current_target["target"] in character_list[current_target["team"]]:
