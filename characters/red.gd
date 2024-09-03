@@ -7,15 +7,13 @@ var dialogue: Dictionary = {}
 func _ready():
 	instances += 1
 	name = "Red"+str(instances)
-	stats = Stats.new(name, 5, 1, 2, "res://red.png")
+	stats = Stats.new("res://characters/red.json")
 	texture = load(stats.SPRITE)
-	vulnerability.append("ice")
-	resistant.append("fire")
 
 func _exit_tree() -> void:
 	instances = max(instances - 1, 0)
 	
-func take_dmg(attk: Dictionary):
+func take_dmg(attk: Globals.Damage_info):
 	super(attk)
 
 func start_turn(character_list: Dictionary):

@@ -31,7 +31,7 @@ func battle_loop():
 					interupt = false
 		calc_turn_order()
 		if num_fighters["Enemies"] <= 0:
-			print("Heros WIN!")
+			print("Heroes WIN!")
 			change_level.emit("level_1", {"points":20}, false)
 			#the level doesn't change fast enough, so the loop continues
 			break
