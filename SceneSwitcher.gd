@@ -21,5 +21,6 @@ func change_level(level_name: String, data: Dictionary, level_persist: bool):
 	add_child(next_level)
 	remove_child(current_scene)
 	current_scene = next_level
-	current_scene.connect("change_level", change_level)
+	if not current_scene.is_connected("change_level", change_level):
+		current_scene.connect("change_level", change_level)
 	print(old_scene)

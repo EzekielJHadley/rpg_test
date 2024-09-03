@@ -1,12 +1,10 @@
 extends Character
 
 func _ready():
-	stats = Stats.new(name, 10, 2, 3, "res://icon.svg")
-	stats.add_spell(Ice_spell.new())
-	stats.add_spell(Fire_spell.new())
+	stats = PlayerTeam.team[name]
 
-func start_turn(_character_list: Dictionary):
-	await super(_character_list)
+func start_turn(character_list: Dictionary):
+	await super(character_list)
 	Event.emit(self, "player_turn", {})
 	
 func attack(target):
