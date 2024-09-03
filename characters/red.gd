@@ -9,8 +9,6 @@ func _ready():
 	name = "Red"+str(instances)
 	stats = Stats.new("res://characters/red.json")
 	texture = load(stats.SPRITE)
-	vulnerability.append(Globals.Dmg_type.ICE)
-	resistant.append(Globals.Dmg_type.FIRE)
 
 func _exit_tree() -> void:
 	instances = max(instances - 1, 0)

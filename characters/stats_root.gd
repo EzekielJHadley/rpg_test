@@ -10,6 +10,10 @@ var MGK: int
 
 var spells_available: Dictionary = {}
 
+var vulnerability: Array = []
+var resistant: Array = []
+var immune: Array = []
+
 var SPRITE: String
 var PORTRAIT: String
 
@@ -38,7 +42,16 @@ func load_from_json(file_name: String):
 	HP = HP_max
 	STR = stats_value.get("STR", 1)
 	MGK = stats_value.get("MGK", 1)
-	print("MKG get: " + str(MGK))
+	
+	var vuln: Array = stats_value.get("vulnerability", [])
+	for type in vuln:
+		vulnerability.append(Globals.string_to_Dmg_type(type))
+	var res: Array = stats_value.get("resistant", [])
+	for type in res:
+		resistant.append(Globals.string_to_Dmg_type(type))
+	var immn: Array = stats_value.get("vulnerability", [])
+	for type in immn:
+		immune.append(Globals.string_to_Dmg_type(type))
 	
 	SPRITE = stats_value.get("SPRITE", "res://icon.svg")
 	PORTRAIT = stats_value.get("PORTRAIT", "res://icon.svg")

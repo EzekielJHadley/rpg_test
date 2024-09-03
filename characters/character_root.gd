@@ -4,10 +4,6 @@ class_name Character
 signal Event(character: Character, event_type: String, data: Dictionary)
 signal End_turn
 
-var vulnerability: Array = []
-var resistant: Array = []
-var immune: Array = []
-
 var stats: Stats:
 	set(value):
 		stats = value
@@ -37,11 +33,11 @@ func magic_attack(target: Character, spell: String):
 	
 func take_dmg(attk: Globals.Damage_info):
 	var dmg_taken = attk.damage
-	if attk.dmg_type in vulnerability:
+	if attk.dmg_type in stats.vulnerability:
 		dmg_taken *= 2
-	elif attk.dmg_type in resistant:
+	elif attk.dmg_type in stats.resistant:
 		dmg_taken = floor(dmg_taken/2.0)
-	elif attk.dmg_type in immune or attk.dmg_type == Globals.Dmg_type.NONE:
+	elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
 		dmg_taken = 0
 	stats.HP -= dmg_taken
 	update_health_bar()
