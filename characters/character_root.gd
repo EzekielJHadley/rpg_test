@@ -13,13 +13,14 @@ func start_turn(_character_list: Dictionary):
 	print("starting " + self.name + "'s turn!")
 
 func end_turn():
-	await get_tree().create_timer(1).timeout
 	End_turn.emit()
 
 
 func attack(target: Character):
 	print(name + " is attacking")
 	var atk_info: Globals.Damage_info = stats.base_attk()
+	#play attack animation
+	await get_tree().create_timer(1).timeout
 	var base_attk = {"target":target, "data":atk_info}
 	Event.emit(self, "attack", base_attk)
 	
@@ -27,8 +28,10 @@ func magic_attack(target: Character, spell: String):
 	print(name + " is using: " + spell)
 	#get spell scene, add to scene
 	#await spell animation
-	var atk_info = stats.magic_attk(spell)
+	var atk_info = await stats.magic_attk(spell)
 	var magic_attk = {"target":target, "data":atk_info}
+	#attach spell scene and play animation
+	await get_tree().create_timer(1).timeout
 	Event.emit(self, "attack", magic_attk)
 	
 func take_dmg(attk: Globals.Damage_info):
