@@ -7,9 +7,9 @@ signal End_turn
 var stats: Stats:
 	set(value):
 		stats = value
-		init_health_bar()
+		init_stats_display()
 		stats.health_update.connect(update_health_bar)
-		stats.magic_update.connect(update_magic_bar)
+		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
 	print("starting " + self.name + "'s turn!")
@@ -60,17 +60,17 @@ func character_dead():
 func is_alive() -> bool:
 	return stats.HP > 0
 
-func init_health_bar():
-	$VBoxContainer/HealthBar.max_value = stats.HP_max
-	$VBoxContainer/HealthBar.value = stats.HP
+func init_stats_display():
+	$StatsDisplay/HealthBar.max_value = stats.HP_max
+	$StatsDisplay/HealthBar.value = stats.HP
 	if stats.MP_max > 0:
-		$VBoxContainer/MagicBar.max_value = stats.MP_max
-		$VBoxContainer/MagicBar.value = stats.MP
+		$StatsDisplay/ManaBar.max_value = stats.MP_max
+		$StatsDisplay/ManaBar.value = stats.MP
 	else:
-		$VBoxContainer/MagicBar.visible = false
+		$StatsDisplay/ManaBar.visible = false
 
 func update_health_bar(new_hp):
-	$VBoxContainer/HealthBar.value = new_hp
+	$StatsDisplay/HealthBar.value = new_hp
 
-func update_magic_bar(new_mp):
-	$VBoxContainer/MagicBar.value = new_mp
+func update_mana_bar(new_mp):
+	$StatsDisplay/ManaBar.value = new_mp

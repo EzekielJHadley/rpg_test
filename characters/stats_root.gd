@@ -2,7 +2,7 @@ extends RefCounted
 class_name Stats
 
 signal health_update(new_hp)
-signal magic_update(new_mp)
+signal mana_update(new_mp)
 
 var character_name: String = ""
 
@@ -14,7 +14,7 @@ var HP: int:
 var MP_max: int
 var MP: int:
 	set(value):
-		magic_update.emit(value)
+		mana_update.emit(value)
 		MP = value
 var STR: int
 var MGK: int
