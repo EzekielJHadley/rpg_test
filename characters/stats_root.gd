@@ -1,10 +1,21 @@
 extends RefCounted
 class_name Stats
 
+signal health_update(new_hp)
+signal magic_update(new_mp)
+
 var character_name: String = ""
 
 var HP_max: int
-var HP: int
+var HP: int:
+	set(value):
+		health_update.emit(value)
+		HP = value
+var MP_max: int
+var MP: int:
+	set(value):
+		magic_update.emit(value)
+		MP = value
 var STR: int
 var MGK: int
 
@@ -22,13 +33,20 @@ func _init(stats_file: String) -> void:
 
 func add_spell(new_spell: Magic):
 	spells_available[new_spell.name] = new_spell
+	
+func get_spell_list() -> Dictionary:
+	var spell_list: Dictionary = {}
+	for key in spells_available.keys():
+		spell_list[key] = (spells_available[key].cost < MP)
+	return spell_list
 
 func base_attk() -> Globals.Damage_info:
 	var dmg = STR
 	return Globals.Damage_info.new(Globals.Dmg_type.PHYSICAL, dmg, [])
 
 func magic_attk(spell_name: String) -> Globals.Damage_info:
-	var spell:Magic = spells_available.get(spell_name, Magic.new("null", Globals.Dmg_type.NONE, "STR"))
+	var spell:Magic = spells_available.get(spell_name, Magic.new("null", Globals.Dmg_type.NONE, "STR", 0))
+	MP -= spell.cost
 	return spell.get_spell_attack(self)
 	
 func load_from_json(file_name: String):
@@ -40,6 +58,8 @@ func load_from_json(file_name: String):
 	character_name = stats_value.get("character_name", "NaN")
 	HP_max = stats_value.get("HP_max", 10)
 	HP = HP_max
+	MP_max = stats_value.get("MP_max", 0)
+	MP = MP_max
 	STR = stats_value.get("STR", 1)
 	MGK = stats_value.get("MGK", 1)
 	

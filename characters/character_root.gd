@@ -8,6 +8,8 @@ var stats: Stats:
 	set(value):
 		stats = value
 		init_health_bar()
+		stats.health_update.connect(update_health_bar)
+		stats.magic_update.connect(update_magic_bar)
 
 func start_turn(_character_list: Dictionary):
 	print("starting " + self.name + "'s turn!")
@@ -40,7 +42,6 @@ func take_dmg(attk: Globals.Damage_info):
 	elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
 		dmg_taken = 0
 	stats.HP -= dmg_taken
-	update_health_bar()
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})
@@ -60,8 +61,16 @@ func is_alive() -> bool:
 	return stats.HP > 0
 
 func init_health_bar():
-	$HealthBar.max_value = stats.HP_max
-	$HealthBar.value = stats.HP
+	$VBoxContainer/HealthBar.max_value = stats.HP_max
+	$VBoxContainer/HealthBar.value = stats.HP
+	if stats.MP_max > 0:
+		$VBoxContainer/MagicBar.max_value = stats.MP_max
+		$VBoxContainer/MagicBar.value = stats.MP
+	else:
+		$VBoxContainer/MagicBar.visible = false
 
-func update_health_bar():
-	$HealthBar.value = stats.HP
+func update_health_bar(new_hp):
+	$VBoxContainer/HealthBar.value = new_hp
+
+func update_magic_bar(new_mp):
+	$VBoxContainer/MagicBar.value = new_mp

@@ -8,7 +8,7 @@ signal finished
 var chars_per_second: int = 50
 var word_delay: float = 0.0
 
-var spells_available: Array
+var spells_available: Dictionary
 
 func _process(delta: float) -> void:
 	if $combat_box/dialogue.visible:
@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 			else:
 				word_delay += delta
 			
-func add_spells(spell_list: Array) -> void:
+func add_spells(spell_list: Dictionary) -> void:
 	spells_available = spell_list
 
 func display(display_type: String, data: Dictionary):
@@ -35,8 +35,9 @@ func display(display_type: String, data: Dictionary):
 				$combat_box/Player_actions/Magic.disabled = true
 			$combat_box/Player_actions.visible = true
 		"magic_atk":
-			for spell in spells_available:
+			for spell in spells_available.keys():
 				$"combat_box/Magic_attacks/Spell List".add_item(spell, load("res://icon.svg"))
+				$"combat_box/Magic_attacks/Spell List".set_item_disabled(-1, not spells_available[spell])
 			$combat_box/Magic_attacks.visible = true
 		"dialogue":
 			$combat_box/dialogue/VBoxContainer/conversation.text = data.get("text", "NaN")
@@ -65,3 +66,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				$combat_box/dialogue.visible = false
 				finished.emit()
+
+
+func _on_magic_back_pressed() -> void:
+	display("player_turn", {})
