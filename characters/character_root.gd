@@ -7,7 +7,7 @@ signal End_turn
 var stats: Stats:
 	set(value):
 		stats = value
-		init_stats_display()
+		init_status_display()
 		stats.health_update.connect(update_health_bar)
 		stats.mana_update.connect(update_mana_bar)
 
@@ -60,17 +60,17 @@ func character_dead():
 func is_alive() -> bool:
 	return stats.HP > 0
 
-func init_stats_display():
-	$StatsDisplay/HealthBar.max_value = stats.HP_max
-	$StatsDisplay/HealthBar.value = stats.HP
+func init_status_display():
+	$StatusDisplay/HealthBar.max_value = stats.HP_max
+	$StatusDisplay/HealthBar.value = stats.HP
 	if stats.MP_max > 0:
-		$StatsDisplay/ManaBar.max_value = stats.MP_max
-		$StatsDisplay/ManaBar.value = stats.MP
+		$StatusDisplay/ManaBar.max_value = stats.MP_max
+		$StatusDisplay/ManaBar.value = stats.MP
 	else:
-		$StatsDisplay/ManaBar.visible = false
+		$StatusDisplay/ManaBar.visible = false
 
 func update_health_bar(new_hp):
-	$StatsDisplay/HealthBar.value = new_hp
+	$StatusDisplay/HealthBar.value = new_hp
 
 func update_mana_bar(new_mp):
-	$StatsDisplay/ManaBar.value = new_mp
+	$StatusDisplay/ManaBar.value = new_mp
