@@ -20,9 +20,12 @@ func attack(target: Character):
 	print(name + " is attacking")
 	var atk_info: Globals.Damage_info = stats.base_attk()
 	#play attack animation
-	await get_tree().create_timer(1).timeout
+	await play_attack_animation()
 	var base_attk = {"target":target, "data":atk_info}
 	Event.emit(self, "attack", base_attk)
+	
+func play_attack_animation():
+	await get_tree().create_timer(1).timeout
 	
 func magic_attack(target: Character, spell: String):
 	print(name + " is using: " + spell)
@@ -31,9 +34,12 @@ func magic_attack(target: Character, spell: String):
 	var atk_info = await stats.magic_attk(spell)
 	var magic_attk = {"target":target, "data":atk_info}
 	#attach spell scene and play animation
-	await get_tree().create_timer(1).timeout
+	await play_attack_animation() #using the animation stored in the magic atk_info
 	Event.emit(self, "attack", magic_attk)
-	
+
+func play_magic_animation(animation = null):
+	await get_tree().create_timer(1).timeout
+
 func take_dmg(attk: Globals.Damage_info):
 	var dmg_taken = attk.damage
 	if attk.dmg_type in stats.vulnerability:
