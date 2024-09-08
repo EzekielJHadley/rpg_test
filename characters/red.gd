@@ -19,5 +19,5 @@ func take_dmg(attk: Globals.Damage_info):
 func start_turn(character_list: Dictionary):
 	await super(character_list)
 	var target = character_list["Allies"][randi() % len(character_list["Allies"])]
-	attack(target)
+	await attack(target)
 	end_turn()

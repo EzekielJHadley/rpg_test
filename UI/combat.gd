@@ -59,13 +59,12 @@ func _on_spell_list_item_activated(index: int) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT :
-			if $combat_box/dialogue/VBoxContainer/conversation.visible_ratio < 1.0:
-				$combat_box/dialogue/VBoxContainer/conversation.visible_ratio = 1
-			else:
-				$combat_box/dialogue.visible = false
-				finished.emit()
+	if event.is_action_pressed("continue") and $combat_box/dialogue.visible:
+		if $combat_box/dialogue/VBoxContainer/conversation.visible_ratio < 1.0:
+			$combat_box/dialogue/VBoxContainer/conversation.visible_ratio = 1
+		else:
+			$combat_box/dialogue.visible = false
+			finished.emit()
 
 
 func _on_magic_back_pressed() -> void:

@@ -8,7 +8,7 @@ func start_turn(character_list: Dictionary):
 	Event.emit(self, "player_turn", {})
 	
 func attack(target):
-	super(target)
+	await super(target)
 	end_turn()
 
 func magic_attack(target: Character, spell: String):
