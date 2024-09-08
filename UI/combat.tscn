@@ -44,7 +44,6 @@ disabled = true
 text = "Flee"
 
 [node name="Magic_attacks" type="VBoxContainer" parent="combat_box"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
@@ -53,6 +52,10 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 fixed_icon_size = Vector2i(20, 20)
+
+[node name="Button" type="Button" parent="combat_box/Magic_attacks"]
+layout_mode = 2
+text = "Back"
 
 [node name="dialogue" type="HBoxContainer" parent="combat_box"]
 visible = false
@@ -82,3 +85,4 @@ visible_characters_behavior = 1
 [connection signal="pressed" from="combat_box/Player_actions/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="combat_box/Player_actions/Magic" to="." method="_on_magic_pressed"]
 [connection signal="item_activated" from="combat_box/Magic_attacks/Spell List" to="." method="_on_spell_list_item_activated"]
+[connection signal="pressed" from="combat_box/Magic_attacks/Button" to="." method="_on_magic_back_pressed"]

@@ -47,7 +47,7 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 	match event_type:
 		#1) player turn
 		"player_turn":
-			$Combat.add_spells(character.stats.spells_available.keys())
+			$Combat.add_spells(character.stats.get_spell_list())
 			$Combat.display(event_type, {})
 			$Selector.visible = true
 			current_char = character
