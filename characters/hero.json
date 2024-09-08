@@ -1,6 +1,7 @@
 {
 	"character_name":"Hero",
 	"HP_max": 10,
+	"MP_max": 12,
 	"STR": 2,
 	"MGK": 3,
 	"SPRITE": "res://icon.svg",

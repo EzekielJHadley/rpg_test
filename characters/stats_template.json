@@ -1,6 +1,7 @@
 {
 	"character_name":"",
 	"HP_max": 0,
+	"MP_max": 0,
 	"STR": 0,
 	"MGK": 0,
 	"SPRITE": "res://icon.svg",
