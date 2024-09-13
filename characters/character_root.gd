@@ -12,9 +12,11 @@ var stats: Stats:
 		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
+	$Boarder.visible = true
 	print("starting " + self.name + "'s turn!")
 
 func end_turn():
+	$Boarder.visible = false
 	End_turn.emit()
 
 
@@ -51,6 +53,7 @@ func take_dmg(attk: Globals.Damage_info):
 	elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
 		dmg_taken = 0
 	stats.HP -= dmg_taken
+	print(name + " takes: " + str(dmg_taken) + " points of damage.")
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})

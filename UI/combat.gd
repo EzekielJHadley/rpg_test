@@ -36,14 +36,14 @@ func display(display_type: String, data: Dictionary):
 			$combat_box/Player_actions.visible = true
 		"magic_atk":
 			for spell in spells_available.keys():
-				$"combat_box/Magic_attacks/Spell List".add_item(spell, load("res://icon.svg"))
+				$"combat_box/Magic_attacks/Spell List".add_item(spell, load("res://resource/Sprites/icon.svg"))
 				$"combat_box/Magic_attacks/Spell List".set_item_disabled(-1, not spells_available[spell])
 			$combat_box/Magic_attacks.visible = true
 		"dialogue":
 			$combat_box/dialogue/VBoxContainer/conversation.text = data.get("text", "NaN")
 			$combat_box/dialogue/VBoxContainer/conversation.visible_characters = 0
 			$combat_box/dialogue/VBoxContainer/speaker.text = data.get("name", "NaN")
-			$combat_box/dialogue/speaker_portrait.texture = load(data.get("protrait", "res://icon.svg"))
+			$combat_box/dialogue/speaker_portrait.texture = load(data.get("protrait", "res://resource/Sprites/icon.svg"))
 			print("Displaying: " + data["text"])
 			$combat_box/dialogue.visible = true
 
