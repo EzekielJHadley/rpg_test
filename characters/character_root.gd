@@ -12,11 +12,11 @@ var stats: Stats:
 		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
-	$Boarder.visible = true
+	$Border.visible = true
 	print("starting " + self.name + "'s turn!")
 
 func end_turn():
-	$Boarder.visible = false
+	$Border.visible = false
 	End_turn.emit()
 
 

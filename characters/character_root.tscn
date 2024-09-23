@@ -32,7 +32,7 @@ show_percentage = false
 
 [node name="interupts" type="Node2D" parent="."]
 
-[node name="Boarder" type="Sprite2D" parent="."]
+[node name="Border" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("2_qkktv")
 offset = Vector2(0, -64)
