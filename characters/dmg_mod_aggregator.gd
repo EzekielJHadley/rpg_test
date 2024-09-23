@@ -1,5 +1,5 @@
 extends RefCounted
-class_name Attk_calculator
+class_name Dmg_mod_aggregator
 
 var attk_aggregator = {}
 

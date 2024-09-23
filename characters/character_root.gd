@@ -43,14 +43,16 @@ func play_magic_animation(animation = null):
 	await get_tree().create_timer(1).timeout
 
 func take_dmg(attk: Globals.Damage_info):
-	var dmg_taken = attk.damage
-	if attk.dmg_type in stats.vulnerability:
-		dmg_taken *= 2
-	elif attk.dmg_type in stats.resistant:
-		dmg_taken = floor(dmg_taken/2.0)
-	elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
-		dmg_taken = 0
-	stats.HP -= dmg_taken
+	
+	stats.defend(attk)
+	#var dmg_taken = attk.damage
+	#if attk.dmg_type in stats.vulnerability:
+		#dmg_taken *= 2
+	#elif attk.dmg_type in stats.resistant:
+		#dmg_taken = floor(dmg_taken/2.0)
+	#elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
+		#dmg_taken = 0
+	#stats.HP -= dmg_taken
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})

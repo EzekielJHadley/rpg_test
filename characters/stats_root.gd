@@ -47,10 +47,10 @@ func get_spell_list() -> Dictionary:
 	return spell_list
 	
 func calculate_stats():
-	var calculator = Stat_calculator.new(self)
+	var aggregator = Stat_mod_aggregator.new()
 	for passive in passive_skills:
-		pass
-	var updated_stats = calculator.calculate()
+		passive.stats_modifier(aggregator)
+	var updated_stats = aggregator.calculate()
 	#now assigned the calculated skills to the new skills
 	#for HP and MP, increase by how much max increases
 	#they don't reset when their maxes increase
@@ -68,12 +68,35 @@ func calculate_stats():
 
 func base_attk() -> Globals.Damage_info:
 	var dmg = STR
-	return Globals.Damage_info.new(Globals.Dmg_type.PHYSICAL, dmg, [])
+	var base_dmg = Globals.Damage_info.new(Globals.Dmg_type.PHYSICAL, dmg, [])
+	
+	var aggregator = Dmg_mod_aggregator.new(base_dmg)
+	for passive in passive_skills:
+		passive.dmg_modifier(aggregator)
+		
+	var final_dmg = aggregator.calculate()
+	
+	return final_dmg
 
 func magic_attk(spell_name: String) -> Globals.Damage_info:
 	var spell:Magic = spells_available.get(spell_name, Magic.new("null", Globals.Dmg_type.NONE, "STR", 0))
 	MP -= spell.cost
-	return spell.get_spell_attack(self)
+	
+	var aggregator = Dmg_mod_aggregator.new(spell.get_spell_attack(self))
+	for passive in passive_skills:
+		passive.magic_modifiers(aggregator)
+	
+	var final_spell_attk = aggregator.calculate()
+	
+	return final_spell_attk
+	
+func defend(incoming_attack: Globals.Damage_info):
+	var aggregator = Dmg_mod_aggregator.new(incoming_attack)
+	for passive in passive_skills:
+		passive.magic_modifiers(aggregator)
+	
+	var final_dmg = aggregator.calculate()
+	HP -= final_dmg.damage
 	
 func load_from_json(file_name: String):
 	var json = JSON.new()

@@ -21,7 +21,7 @@ func add_modifier(operation: int, modifier: float):
 		FLAT:
 			aggregator["on top"] += modifier
 		_:
-			print("Unrecognized operation, please check the docks for the correct types")
+			print("Unrecognized operation, please check the docs for the correct types")
 			
 func calculate() -> int:
 	var ret_val: int

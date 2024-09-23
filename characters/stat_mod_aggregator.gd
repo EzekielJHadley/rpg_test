@@ -1,5 +1,5 @@
 extends RefCounted
-class_name Stat_calculator
+class_name Stat_mod_aggregator
 
 var stats_aggregator = {}
 
@@ -13,16 +13,8 @@ var stats_aggregator = {}
 #: eg if two sources give an additive +1% and another gives a multiplicative +10%
 #then the list will look like: [1.02, 1.10]
 
-func _init(stats: Stats):
-	stats_aggregator = {
-		"HP_max": Mod_calculator.new(stats.HP_base),
-		"MP_max": Mod_calculator.new(stats.MP_base),
-		"STR": Mod_calculator.new(stats.STR_base),
-		"MGK": Mod_calculator.new(stats.MGK_base),
-	}
 
 func modify_stat(stat:String, operation: int, modifier: float):
-	assert(stat in stats_aggregator)
 	stats_aggregator[stat].add_modifier(operation, modifier)
 
 func calculate() -> Dictionary:
