@@ -17,6 +17,7 @@ var MP: int:
 		mana_update.emit(value)
 		MP = value
 var STR: int
+var SPD: int
 var MGK: int
 
 var spells_available: Dictionary = {}
@@ -61,6 +62,7 @@ func load_from_json(file_name: String):
 	MP_max = stats_value.get("MP_max", 0)
 	MP = MP_max
 	STR = stats_value.get("STR", 1)
+	SPD = stats_value.get("SPD", 1)
 	MGK = stats_value.get("MGK", 1)
 	
 	var vuln: Array = stats_value.get("vulnerability", [])
@@ -73,5 +75,5 @@ func load_from_json(file_name: String):
 	for type in immn:
 		immune.append(Globals.string_to_Dmg_type(type))
 	
-	SPRITE = stats_value.get("SPRITE", "res://icon.svg")
-	PORTRAIT = stats_value.get("PORTRAIT", "res://icon.svg")
+	SPRITE = stats_value.get("SPRITE", "res://resource/Sprites/icon.svg")
+	PORTRAIT = stats_value.get("PORTRAIT", "res://resource/Sprites/icon.svg")

@@ -2,6 +2,7 @@ extends Character
 
 func _ready():
 	stats = PlayerTeam.team[name]
+	texture = load(stats.SPRITE)
 
 func start_turn(character_list: Dictionary):
 	await super(character_list)
@@ -12,7 +13,7 @@ func attack(target):
 	end_turn()
 
 func magic_attack(target: Character, spell: String):
-	super(target, spell)
+	await super(target, spell)
 	end_turn()
 
 func character_dead():
