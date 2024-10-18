@@ -12,6 +12,8 @@ var stats: Stats:
 		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
+	for effect in stats.passive_skills:
+		await effect.on_turn_start(self)
 	print("starting " + self.name + "'s turn!")
 
 func end_turn():
@@ -43,8 +45,11 @@ func play_magic_animation(animation = null):
 	await get_tree().create_timer(1).timeout
 
 func take_dmg(attk: Globals.Damage_info):
-	
-	stats.defend(attk)
+	var aggregator = Def_mod_aggregator.new(attk)
+	for passive in stats.passive_skills:
+		passive.def_modifier(aggregator)
+	var updated_attk = aggregator.calculate()	
+	stats.defend(updated_attk)
 	#var dmg_taken = attk.damage
 	#if attk.dmg_type in stats.vulnerability:
 		#dmg_taken *= 2

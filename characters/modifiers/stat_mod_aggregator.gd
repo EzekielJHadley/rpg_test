@@ -1,6 +1,7 @@
 extends RefCounted
 class_name Stat_mod_aggregator
 
+var base_stats: Dictionary
 var stats_aggregator = {}
 
 #each stat will have a key of the same name as the stat
@@ -13,8 +14,12 @@ var stats_aggregator = {}
 #: eg if two sources give an additive +1% and another gives a multiplicative +10%
 #then the list will look like: [1.02, 1.10]
 
+func _init(stats: Dictionary):
+	base_stats = stats
 
 func modify_stat(stat:String, operation: int, modifier: float):
+	if stat not in stats_aggregator:
+		stats_aggregator[stat] = Mod_calculator.new(base_stats.get(stat, 1))
 	stats_aggregator[stat].add_modifier(operation, modifier)
 
 func calculate() -> Dictionary:

@@ -20,6 +20,8 @@ func add_modifier(operation: int, modifier: float):
 			aggregator["multiplication"].append(1+modifier)
 		FLAT:
 			aggregator["on top"] += modifier
+		NONE:
+			pass
 		_:
 			print("Unrecognized operation, please check the docs for the correct types")
 			

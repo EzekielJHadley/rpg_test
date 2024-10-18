@@ -24,12 +24,12 @@ func stats_modifier(calc: Stat_mod_aggregator):
 #operation: int, modifier: float, add_effects = null, dmg_type = null
 func dmg_modifier(calc: Dmg_mod_aggregator):
 	for mod in attk_mods:
-		calc.modify_stat(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("add_effect", null), mod.get("dmg_type", null))
+		calc.modify_attk(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("add_effect", []), mod.get("dmg_type", null))
 
 func magic_modifiers(calc: Dmg_mod_aggregator):
 	for mod in magic_mods:
-		calc.modify_stat(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("add_effect", null), mod.get("dmg_type", null))
+		calc.modify_attk(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("add_effect", []), mod.get("dmg_type", null))
 
-func def_modifier(calc: Dmg_mod_aggregator):
+func def_modifier(calc: Def_mod_aggregator):
 	for mod in def_mods:
-		calc.modify_stat(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("add_effect", null), mod.get("dmg_type", null))
+		calc.modify_dmg(mod.get("operator", Mod_calculator.NONE), mod.get("modifier", 0), mod.get("dmg_type", null))

@@ -47,7 +47,7 @@ func get_spell_list() -> Dictionary:
 	return spell_list
 	
 func calculate_stats():
-	var aggregator = Stat_mod_aggregator.new()
+	var aggregator = Stat_mod_aggregator.new({"HP_max":HP_base, "MP_max":MP_base,"STR":STR_base, "MGK":MGK_base})
 	for passive in passive_skills:
 		passive.stats_modifier(aggregator)
 	var updated_stats = aggregator.calculate()
@@ -96,6 +96,7 @@ func defend(incoming_attack: Globals.Damage_info):
 		passive.magic_modifiers(aggregator)
 	
 	var final_dmg = aggregator.calculate()
+	print(character_name + ": I'm taking: " + str(final_dmg.damage) + " " + Globals.Dmg_type_to_string(final_dmg.dmg_type) + " damage!")
 	HP -= final_dmg.damage
 	
 func load_from_json(file_name: String):
@@ -123,5 +124,11 @@ func load_from_json(file_name: String):
 	
 	SPRITE = stats_value.get("SPRITE", "res://icon.svg")
 	PORTRAIT = stats_value.get("PORTRAIT", "res://icon.svg")
+
+	#passives
+	for skill_name in stats_value.get("Passives", []):
+		var skill = load("res://characters/modifiers/" + skill_name + ".gd").new()
+		passive_skills.append(skill)
+
 	
 	calculate_stats()
