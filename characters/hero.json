@@ -3,8 +3,9 @@
 	"HP_max": 10,
 	"MP_max": 12,
 	"STR": 2,
+	"SPD":2,
 	"MGK": 3,
-	"SPRITE": "res://icon.svg",
-	"PORTRAIT": "res://icon.svg",
-	"Passives":["hero_buff"]
+	"SPRITE": "res://resource/Sprites/icon.svg",
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"Passives":["hero_buff"],
 }

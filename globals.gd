@@ -1,6 +1,6 @@
 extends Node
 
-enum Dmg_type {NONE, PHYSICAL, FIRE, ICE}
+enum Dmg_type {NONE, PHYSICAL, FIRE, ICE, LIGHT}
 
 func string_to_Dmg_type(type_str: String) -> int:
 	var ret: Dmg_type

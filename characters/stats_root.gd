@@ -9,6 +9,7 @@ var character_name: String = ""
 var HP_base: int
 var MP_base: int
 var STR_base: int
+var SPD_base: int
 var MGK_base: int
 
 var HP_max: int = 0
@@ -22,6 +23,7 @@ var MP: int = 0:
 		mana_update.emit(value)
 		MP = value
 var STR: int
+var SPD: int
 var MGK: int
 
 var spells_available: Dictionary = {}
@@ -64,6 +66,7 @@ func calculate_stats():
 		MP += delta_mp
 	
 	STR = updated_stats.get("STR", STR_base)
+  SPD = updated_stats.get("SPD", SPD_base)
 	MGK = updated_stats.get("MGK", MGK_base)
 
 func base_attk() -> Globals.Damage_info:
@@ -106,9 +109,11 @@ func load_from_json(file_name: String):
 	assert(error == OK)
 	var stats_value = json.data
 	character_name = stats_value.get("character_name", "NaN")
+  
 	HP_base = stats_value.get("HP_max", 10)
 	MP_base = stats_value.get("MP_max", 0)
 	STR_base = stats_value.get("STR", 1)
+  SPD_base = stats_value.get("SPD", 1)
 	MGK_base = stats_value.get("MGK", 1)
 	
 	#TODO: turn vuln/resist/immune into passive modifiers
@@ -122,8 +127,9 @@ func load_from_json(file_name: String):
 	for type in immn:
 		immune.append(Globals.string_to_Dmg_type(type))
 	
-	SPRITE = stats_value.get("SPRITE", "res://icon.svg")
-	PORTRAIT = stats_value.get("PORTRAIT", "res://icon.svg")
+  
+	SPRITE = stats_value.get("SPRITE", "res://resource/Sprites/icon.svg")
+	PORTRAIT = stats_value.get("PORTRAIT", "res://resource/Sprites/icon.svg")
 
 	#passives
 	for skill_name in stats_value.get("Passives", []):

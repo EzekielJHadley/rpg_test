@@ -14,9 +14,12 @@ var stats: Stats:
 func start_turn(_character_list: Dictionary):
 	for effect in stats.passive_skills:
 		await effect.on_turn_start(self)
+  
+	$Border.visible = true
 	print("starting " + self.name + "'s turn!")
 
 func end_turn():
+	$Border.visible = false
 	End_turn.emit()
 
 

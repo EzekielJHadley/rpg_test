@@ -4,7 +4,7 @@
 	"MP_max": 0,
 	"STR": 0,
 	"MGK": 0,
-	"SPRITE": "res://icon.svg",
-	"PORTRAIT": "res://icon.svg",
+	"SPRITE": "res://resource/Sprites/icon.svg",
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
 	"Passives":[],
 }
