@@ -91,9 +91,9 @@ func magic_attk(spell_name: String) -> Globals.Damage_info:
 	return final_spell_attk
 	
 func defend(incoming_attack: Globals.Damage_info):
-	var aggregator = Dmg_mod_aggregator.new(incoming_attack)
+	var aggregator = Def_mod_aggregator.new(attk)
 	for passive in passive_skills:
-		passive.magic_modifiers(aggregator)
+		passive.def_modifier(aggregator)
 	
 	var final_dmg = aggregator.calculate()
 	print(character_name + ": I'm taking: " + str(final_dmg.damage) + " " + Globals.Dmg_type_to_string(final_dmg.dmg_type) + " damage!")
