@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sjfqlc3nt0ch"
-path="res://.godot/imported/boarder.bmp-40e971dbd9361686d9f1e19922a17cc0.ctex"
+path="res://.godot/imported/border.bmp-f48db9b22c14cd29abe68bad3024efd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resource/Sprites/boarder.bmp"
-dest_files=["res://.godot/imported/boarder.bmp-40e971dbd9361686d9f1e19922a17cc0.ctex"]
+source_file="res://resource/Sprites/border.bmp"
+dest_files=["res://.godot/imported/border.bmp-f48db9b22c14cd29abe68bad3024efd3.ctex"]
 
 [params]
 
