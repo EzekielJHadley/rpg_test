@@ -2,10 +2,11 @@
 	"character_name":"Red",
 	"HP_max": 6,
 	"STR": 1,
+	"SPD":3,
 	"MGK": 2,
 	"vulnerability": ["ice"],
 	"resistant": ["fire"],
 	"immune": [],
-	"SPRITE": "res://red.png",
-	"PORTRAIT": "res://red.png"
+	"SPRITE": "res://resource/Sprites/red.png",
+	"PORTRAIT": "res://resource/Sprites/red.png"
 }

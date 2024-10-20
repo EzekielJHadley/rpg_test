@@ -31,16 +31,21 @@ func battle_loop():
 				fighter.start_turn(character_list)
 				await fighter.End_turn
 		calc_turn_order()
-		if num_fighters["Enemies"] <= 0:
-			print("Heroes WIN!")
-			change_level.emit("level_1", {"points":20}, false)
-			#the level doesn't change fast enough, so the loop continues
-			break
-		elif num_fighters["Allies"] <= 0:
-			print("Heros LOSE!")
-			change_level.emit("level_1", {}, false)
-			#the level doesn't change fast enough, so the loop continues
-			break
+		
+func check_win_condition():
+	if num_fighters["Enemies"] <= 0:
+		print("Heroes WIN!")
+		#the level doesn't change fast enough, the loop will continue
+		interupt = true
+		interupt_signal = get_tree().create_timer(60).timeout
+		change_level.emit("level_1", {"points":20}, false)
+	elif num_fighters["Allies"] <= 0:
+		print("Heros LOSE!")
+		#the level doesn't change fast enough, the loop will continue
+		interupt = true
+		interupt_signal = get_tree().create_timer(60).timeout
+		change_level.emit("level_1", {}, false)
+		
 
 
 func event_handler(character: Character, event_type: String, data: Dictionary):
@@ -69,6 +74,7 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 				num_fighters["Enemies"] -= 1
 			index = turn_order.find(character)
 			character.visible = false
+			check_win_condition()
 			retarget()
 		"dialogue":
 			$Combat.display(event_type, data)
@@ -82,6 +88,9 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 func add_players():
 	var player = load("res://characters/hero.tscn").instantiate()
 	add_fighter(player, "player")
+	var yellow = load("res://characters/hero.tscn").instantiate()
+	yellow.name = "Yellow"
+	add_fighter(yellow, "player")
 	
 func add_enemy(enemy_scene: String):
 	var enemy = load(enemy_scene).instantiate()
@@ -103,13 +112,17 @@ func add_fighter(fighter:Character, team: String):
 		_:
 			print("Error adding new character!")
 			return
-	
+
+func sort_characters(char1: Character, char2: Character):
+	return char1.stats.SPD > char2.stats.SPD
+
 func calc_turn_order():
 	turn_order = []
 	for ally: Character in character_list["Allies"]:
 		turn_order.append(ally)
 	for enemy: Character in character_list["Enemies"]:
 		turn_order.append(enemy)
+	turn_order.sort_custom(sort_characters)
 
 
 func use_attack_action():
