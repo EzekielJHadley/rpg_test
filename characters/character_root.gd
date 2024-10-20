@@ -44,20 +44,8 @@ func magic_attack(target: Character, spell: String):
 func play_magic_animation(animation = null):
 	await get_tree().create_timer(1).timeout
 
-func take_dmg(attk: Globals.Damage_info):
-	var aggregator = Def_mod_aggregator.new(attk)
-	for passive in stats.passive_skills:
-		passive.def_modifier(aggregator)
-	var updated_attk = aggregator.calculate()	
-	stats.defend(updated_attk)
-	#var dmg_taken = attk.damage
-	#if attk.dmg_type in stats.vulnerability:
-		#dmg_taken *= 2
-	#elif attk.dmg_type in stats.resistant:
-		#dmg_taken = floor(dmg_taken/2.0)
-	#elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
-		#dmg_taken = 0
-	#stats.HP -= dmg_taken
+func take_dmg(attk: Globals.Damage_info):	
+	stats.defend(attk)
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})
