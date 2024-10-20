@@ -9,9 +9,9 @@ TODO list:
 - [x] interrupt event handler within battle loop
 	_includes text display
 - [x] magic and weakness/resistance to elements
-- [ ] passive attributes
+- [x] passive attributes
 - [ ] temporary effects
-- [ ] turn order determiner
+- [x] turn order determiner
 - [ ] create random encounter table
 - [ ] make json available outside compiled binary
 - [ ] over world map
