@@ -6,5 +6,6 @@
 	"SPD":2,
 	"MGK": 3,
 	"SPRITE": "res://resource/Sprites/icon.svg",
-	"PORTRAIT": "res://resource/Sprites/icon.svg"
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"Passives":["hero_buff"],
 }

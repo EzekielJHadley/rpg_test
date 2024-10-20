@@ -16,6 +16,20 @@ func string_to_Dmg_type(type_str: String) -> int:
 	
 	return ret
 
+func Dmg_type_to_string(dmg_type: Dmg_type) ->  String:
+	var ret: String
+	match dmg_type:
+		Dmg_type.PHYSICAL:
+			ret = "physical"
+		Dmg_type.FIRE:
+			ret = "fire"
+		Dmg_type.ICE:
+			ret = "ice"
+		_:
+			ret = "None"
+	
+	return ret
+
 class Damage_info:
 	var dmg_type:int
 	var damage:int

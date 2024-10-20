@@ -12,6 +12,9 @@ var stats: Stats:
 		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
+	for effect in stats.passive_skills:
+		await effect.on_turn_start(self)
+  
 	$Border.visible = true
 	print("starting " + self.name + "'s turn!")
 
@@ -44,16 +47,8 @@ func magic_attack(target: Character, spell: String):
 func play_magic_animation(animation = null):
 	await get_tree().create_timer(1).timeout
 
-func take_dmg(attk: Globals.Damage_info):
-	var dmg_taken = attk.damage
-	if attk.dmg_type in stats.vulnerability:
-		dmg_taken *= 2
-	elif attk.dmg_type in stats.resistant:
-		dmg_taken = floor(dmg_taken/2.0)
-	elif attk.dmg_type in stats.immune or attk.dmg_type == Globals.Dmg_type.NONE:
-		dmg_taken = 0
-	stats.HP -= dmg_taken
-	print(name + " takes: " + str(dmg_taken) + " points of damage.")
+func take_dmg(attk: Globals.Damage_info):	
+	stats.defend(attk)
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})
