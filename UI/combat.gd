@@ -3,12 +3,14 @@ extends CanvasLayer
 
 signal attack
 signal magic_attack(spell_name:String)
+signal use_item(item: Consumable)
 signal finished
 
 var chars_per_second: int = 50
 var word_delay: float = 0.0
 
 var spells_available: Dictionary
+var items_available: Array = []
 
 func _process(delta: float) -> void:
 	if $combat_box/dialogue.visible:
@@ -21,9 +23,18 @@ func _process(delta: float) -> void:
 			
 func add_spells(spell_list: Dictionary) -> void:
 	spells_available = spell_list
+	
+func add_items(invetory: Dictionary) -> void:
+	items_available.clear()
+	for consumable in invetory:
+		if invetory[consumable] > 0:
+			var item_text = str(invetory[consumable]) + "x " + consumable.name
+			var item_display = {"text": item_text, "display":consumable.inv_icon, "item":consumable}
+			items_available.append(item_display)
 
 func display(display_type: String, data: Dictionary):
 	$"combat_box/Magic_attacks/Spell List".clear()
+	$"combat_box/Items/Item List".clear()
 	for ui_element in $combat_box.get_children():
 		ui_element.visible = false
 	visible = true
@@ -39,6 +50,10 @@ func display(display_type: String, data: Dictionary):
 				$"combat_box/Magic_attacks/Spell List".add_item(spell, load("res://resource/Sprites/icon.svg"))
 				$"combat_box/Magic_attacks/Spell List".set_item_disabled(-1, not spells_available[spell])
 			$combat_box/Magic_attacks.visible = true
+		"item":
+			for item_display in items_available:
+				$"combat_box/Items/Item List".add_item(item_display["text"], load(item_display["display"]))
+			$combat_box/Items.visible = true
 		"dialogue":
 			$combat_box/dialogue/VBoxContainer/conversation.text = data.get("text", "NaN")
 			$combat_box/dialogue/VBoxContainer/conversation.visible_characters = 0
@@ -52,11 +67,17 @@ func _on_attack_pressed() -> void:
 
 func _on_magic_pressed() -> void:
 	display("magic_atk", {})
+	
+func _on_item_pressed() -> void:
+	display("item", {})
 
 func _on_spell_list_item_activated(index: int) -> void:
 	var spell_selected = $"combat_box/Magic_attacks/Spell List".get_item_text(index)
 	magic_attack.emit(spell_selected)
-	
+
+func _on_item_list_item_activated(index: int) -> void:
+	var item = items_available[index]["item"]
+	use_item.emit(item)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("continue") and $combat_box/dialogue.visible:

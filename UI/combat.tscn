@@ -33,6 +33,10 @@ layout_mode = 2
 disabled = true
 text = "Magic"
 
+[node name="Item" type="Button" parent="combat_box/Player_actions"]
+layout_mode = 2
+text = "Item"
+
 [node name="Talk" type="Button" parent="combat_box/Player_actions"]
 layout_mode = 2
 disabled = true
@@ -54,6 +58,20 @@ size_flags_vertical = 3
 fixed_icon_size = Vector2i(20, 20)
 
 [node name="Button" type="Button" parent="combat_box/Magic_attacks"]
+layout_mode = 2
+text = "Back"
+
+[node name="Items" type="VBoxContainer" parent="combat_box"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Item List" type="ItemList" parent="combat_box/Items"]
+layout_mode = 2
+size_flags_vertical = 3
+fixed_icon_size = Vector2i(20, 20)
+
+[node name="Button" type="Button" parent="combat_box/Items"]
 layout_mode = 2
 text = "Back"
 
@@ -84,5 +102,8 @@ visible_characters_behavior = 1
 
 [connection signal="pressed" from="combat_box/Player_actions/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="combat_box/Player_actions/Magic" to="." method="_on_magic_pressed"]
+[connection signal="pressed" from="combat_box/Player_actions/Item" to="." method="_on_item_pressed"]
 [connection signal="item_activated" from="combat_box/Magic_attacks/Spell List" to="." method="_on_spell_list_item_activated"]
 [connection signal="pressed" from="combat_box/Magic_attacks/Button" to="." method="_on_magic_back_pressed"]
+[connection signal="item_activated" from="combat_box/Items/Item List" to="." method="_on_item_list_item_activated"]
+[connection signal="pressed" from="combat_box/Items/Button" to="." method="_on_magic_back_pressed"]

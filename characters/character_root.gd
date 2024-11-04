@@ -12,7 +12,7 @@ var stats: Stats:
 		stats.mana_update.connect(update_mana_bar)
 
 func start_turn(_character_list: Dictionary):
-	for effect in stats.passive_skills:
+	for effect in stats.modifiers.get_mods():
 		await effect.on_turn_start(self)
   
 	$Border.visible = true
@@ -43,12 +43,22 @@ func magic_attack(target: Character, spell: String):
 	#attach spell scene and play animation
 	await play_attack_animation() #using the animation stored in the magic atk_info
 	Event.emit(self, "attack", magic_attk)
+	
+func use_item(target: Character, item: Consumable):
+	print(name + " is using " + item.name + " on " + target.name)
+	var item_info = PlayerTeam.inventory.use_item(item)
+	var item_attack = {"target":target, "data":item_info}
+	await play_attack_animation()
+	Event.emit(self, "attack", item_attack)
 
 func play_magic_animation(animation = null):
 	await get_tree().create_timer(1).timeout
 
 func take_dmg(attk: Globals.Damage_info):	
 	stats.defend(attk)
+	for effect in attk.status_effects:
+		apply_effect(effect)
+
 	
 	if stats.HP <= 0:
 		Event.emit(self, "dead", {})
@@ -66,6 +76,14 @@ func character_dead():
 
 func is_alive() -> bool:
 	return stats.HP > 0
+
+func apply_effect(effect: Effect):
+	effect.instant(self)
+	if effect.effect_type != "instant":
+		#attach scene here
+		$StatusDisplay/status_effects.add_child(effect.get_icon())
+		#send effect to stats
+		stats.modifiers.add_mod(effect)
 
 func init_status_display():
 	$StatusDisplay/HealthBar.max_value = stats.HP_max

@@ -30,6 +30,10 @@ step = 0.1
 value = 50.0
 show_percentage = false
 
+[node name="status_effects" type="GridContainer" parent="StatusDisplay"]
+layout_mode = 2
+columns = 4
+
 [node name="interupts" type="Node2D" parent="."]
 
 [node name="Border" type="Sprite2D" parent="."]

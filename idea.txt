@@ -1,0 +1,59 @@
+effects are a kind of modifier
+there are two kinds of effects, continuous and instant
+continuous occur at the start of the turn, you can only have one type of effect at a time (like poison)
+	(should a new one replace or have no effect?)
+instant effects happen when they are applied
+	(some can affect continuous effects, like remove poison)
+
+
+effects can heal/damage, affect a stat, affect attacks (incoming and outgoing)
+
+effects have a time limit (how many turns they last)
+
+continuous effects attach an animation to player sprite, can be activated with signal and destroyed with signal
+
+
+items have effects
+	consumables will usually have instant effects
+
+
+
+
+
+status effects are keys to a datascructure in the character sheet, so that only one can exist at a time
+	this structure needs to be built from some other class that holds the list of possible status effects (OR JSON)
+
+when an effect fires off it will send a signal to the effect scene to play its animation
+cause the damage
+and then await the end signal of the effect scene
+	so that we don't get multiple effects firing off at once.
+
+
+
+effect comes in from an attack
+defend calls another internal character method called apply_effect
+apply_effect gets the effect scene from the effect and adds it to character.tscn
+	the effect scene subscribes to a signal in teh effects object
+apply_effect then adds it to the stats object
+	stats object determines what kind of effect and adds it to the appropriate status effect slot
+
+
+cure poison
+effect comes in to defend
+defend calls apply_effect
+apply_effect adds it to the stats object
+	there is no scene, so it doesn't add anything to character.tscn
+	stats object sees that it is an instant object and calls the effect (passing itself in)
+	the effect calls cure_status_effect(poison)
+		the corresponding status effect gets called to end
+		singal to destroy effect scene is called
+
+
+effect types
+	poison
+	instant
+
+
+
+	print("Fire enum is: " + str(Globals.Dmg_type.FIRE))
+	print(Globals.Dmg_type.keys()[Globals.Dmg_type.FIRE] + " enum is: " + str(Globals.Dmg_type["FIRE"]))
