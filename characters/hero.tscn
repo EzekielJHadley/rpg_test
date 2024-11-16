@@ -6,5 +6,4 @@
 
 [node name="Hero" instance=ExtResource("1_l8sgv")]
 texture = ExtResource("2_my86e")
-offset = Vector2(0, -64)
 script = ExtResource("3_qvbqi")

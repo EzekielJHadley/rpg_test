@@ -1,5 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://kx4gyacnhmxh"]
+[gd_scene load_steps=3 format=3 uid="uid://kx4gyacnhmxh"]
 
 [ext_resource type="PackedScene" uid="uid://cgweu347b7he5" path="res://level/battle/battle_root.tscn" id="1_8yikm"]
+[ext_resource type="Texture2D" uid="uid://pdp642fjxuuw" path="res://resource/UI/MGFC-screen-moc_640x270_to_1920x080.png" id="2_1nr6e"]
 
 [node name="battle_root" instance=ExtResource("1_8yikm")]
+
+[node name="Mgfc---screen-mock" type="Sprite2D" parent="." index="0"]
+position = Vector2(965, 536)
+texture = ExtResource("2_1nr6e")
+
+[node name="enemy0" parent="fighters/Enemies" index="0"]
+position = Vector2(705, 465)
+
+[node name="enemy1" parent="fighters/Enemies" index="1"]
+position = Vector2(377, 696)
+
+[node name="enemy2" parent="fighters/Enemies" index="2"]
+position = Vector2(369, 256)
+
+[node name="player0" parent="fighters/Allies" index="0"]
+position = Vector2(1266, 510)
+
+[node name="player1" parent="fighters/Allies" index="1"]
+position = Vector2(1597, 731)
+
+[node name="player2" parent="fighters/Allies" index="2"]
+position = Vector2(1611, 292)

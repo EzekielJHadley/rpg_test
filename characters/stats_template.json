@@ -3,8 +3,11 @@
 	"HP_max": 0,
 	"MP_max": 0,
 	"STR": 0,
+	"SPD":3,
 	"MGK": 0,
 	"SPRITE": "res://resource/Sprites/icon.svg",
 	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"sprite_width" : 1,
+	"sprite_height" : 1,
 	"Passives":[],
 }

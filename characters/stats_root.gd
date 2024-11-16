@@ -34,6 +34,8 @@ var resistant: Array = []
 var immune: Array = []
 
 var SPRITE: String
+var sprite_width: int
+var sprite_height: int
 var PORTRAIT: String
 
 func _init(stats_file: String) -> void:
@@ -66,7 +68,7 @@ func calculate_stats():
 		MP += delta_mp
 	
 	STR = updated_stats.get("STR", STR_base)
-  SPD = updated_stats.get("SPD", SPD_base)
+	SPD = updated_stats.get("SPD", SPD_base)
 	MGK = updated_stats.get("MGK", MGK_base)
 
 func base_attk() -> Globals.Damage_info:
@@ -104,6 +106,7 @@ func defend(incoming_attack: Globals.Damage_info):
 	
 func load_from_json(file_name: String):
 	var json = JSON.new()
+	print(FileAccess.file_exists(file_name))
 	var json_text = FileAccess.open(file_name, FileAccess.READ).get_as_text()
 	var error = json.parse(json_text)
 	assert(error == OK)
@@ -113,7 +116,7 @@ func load_from_json(file_name: String):
 	HP_base = stats_value.get("HP_max", 10)
 	MP_base = stats_value.get("MP_max", 0)
 	STR_base = stats_value.get("STR", 1)
-  SPD_base = stats_value.get("SPD", 1)
+	SPD_base = stats_value.get("SPD", 1)
 	MGK_base = stats_value.get("MGK", 1)
 	
 	#TODO: turn vuln/resist/immune into passive modifiers
@@ -129,6 +132,9 @@ func load_from_json(file_name: String):
 	
   
 	SPRITE = stats_value.get("SPRITE", "res://resource/Sprites/icon.svg")
+	sprite_width = stats_value.get("sprite_width", 1)
+	sprite_height = stats_value.get("sprite_height", 1)
+
 	PORTRAIT = stats_value.get("PORTRAIT", "res://resource/Sprites/icon.svg")
 
 	#passives

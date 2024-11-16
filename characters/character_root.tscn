@@ -4,14 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://sjfqlc3nt0ch" path="res://resource/Sprites/border.bmp" id="2_qkktv"]
 
 [node name="character_root" type="Sprite2D"]
+offset = Vector2(0, -64)
 script = ExtResource("1_unk6p")
 
 [node name="StatusDisplay" type="VBoxContainer" parent="."]
-offset_left = -39.0
-offset_top = 20.0
-offset_right = 40.0
-offset_bottom = 60.0
-size_flags_vertical = 0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.5
+offset_top = -40.0
+offset_right = 1.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 6
 
 [node name="HealthBar" type="ProgressBar" parent="StatusDisplay"]
 modulate = Color(1, 0, 0, 1)
@@ -34,5 +40,6 @@ show_percentage = false
 
 [node name="Border" type="Sprite2D" parent="."]
 visible = false
+position = Vector2(0, -65)
 texture = ExtResource("2_qkktv")
 offset = Vector2(0, -64)

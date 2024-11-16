@@ -1,0 +1,13 @@
+{
+	"character_name":"Buff Zombie",
+	"HP_max": 15,
+	"MP_max": 5,
+	"STR": 4,
+	"SPD":1,
+	"MGK": 1,
+	"SPRITE": "res://resource/Sprites/PH_buffZombieMagenta.png",
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"sprite_width" : 8,
+	"sprite_height" : 4,
+	"Passives":[],
+}

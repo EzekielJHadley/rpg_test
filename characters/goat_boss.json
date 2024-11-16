@@ -1,0 +1,13 @@
+{
+	"character_name": "GOAT boss",
+	"HP_max": 20,
+	"MP_max": 20,
+	"STR": 6,
+	"SPD": 3,
+	"MGK": 4,
+	"SPRITE": "res://resource/Sprites/PH_goatMidBoss.png",
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"sprite_width": 8,
+	"sprite_height": 4,
+	"Passives": []
+}

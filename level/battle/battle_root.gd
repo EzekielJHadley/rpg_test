@@ -92,8 +92,9 @@ func add_players():
 	yellow.name = "Yellow"
 	add_fighter(yellow, "player")
 	
-func add_enemy(enemy_scene: String):
-	var enemy = load(enemy_scene).instantiate()
+func add_enemy(enemy_stat: String):
+	var enemy = load("res://characters/red.tscn").instantiate()
+	enemy.stat_block = enemy_stat
 	add_fighter(enemy, "enemy")
 
 func add_fighter(fighter:Character, team: String):

@@ -45,7 +45,7 @@ offset_bottom = 373.0
 text = "Battle"
 level_name = "/battle/grass_level_battle"
 data = {
-"enemies": ["res://characters/red.tscn", "res://characters/red.tscn"]
+"enemies": ["res://characters/goat_boss.json", "res://characters/slime_girl.json", "res://characters/zombie.json"]
 }
 scene_persist = true
 

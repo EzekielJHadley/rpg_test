@@ -1,11 +1,13 @@
 {
 	"character_name":"Hero",
-	"HP_max": 10,
+	"HP_max": 20,
 	"MP_max": 12,
-	"STR": 2,
+	"STR": 3,
 	"SPD":2,
 	"MGK": 3,
-	"SPRITE": "res://resource/Sprites/icon.svg",
+	"SPRITE": "res://resource/Sprites/4-sample.png",
 	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"sprite_width" : 2,
+	"sprite_height" : 2,
 	"Passives":["hero_buff"],
 }

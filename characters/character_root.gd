@@ -11,6 +11,15 @@ var stats: Stats:
 		stats.health_update.connect(update_health_bar)
 		stats.mana_update.connect(update_mana_bar)
 
+func _ready():
+	texture = load(stats.SPRITE)
+	hframes = stats.sprite_width
+	vframes = stats.sprite_height
+	offset.y = - texture.get_height()/(2 * vframes)
+	$StatusDisplay.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE )
+	$StatusDisplay.position.y = 20
+
+
 func start_turn(_character_list: Dictionary):
 	for effect in stats.passive_skills:
 		await effect.on_turn_start(self)

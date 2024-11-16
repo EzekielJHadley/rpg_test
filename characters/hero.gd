@@ -2,7 +2,8 @@ extends Character
 
 func _ready():
 	stats = PlayerTeam.team[name]
-	texture = load(stats.SPRITE)
+	super()
+	frame = 2
 
 func start_turn(character_list: Dictionary):
 	await super(character_list)
