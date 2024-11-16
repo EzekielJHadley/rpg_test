@@ -24,11 +24,11 @@ func _process(delta: float) -> void:
 func add_spells(spell_list: Dictionary) -> void:
 	spells_available = spell_list
 	
-func add_items(invetory: Dictionary) -> void:
+func add_items(inventory: Dictionary) -> void:
 	items_available.clear()
-	for consumable in invetory:
-		if invetory[consumable] > 0:
-			var item_text = str(invetory[consumable]) + "x " + consumable.name
+	for consumable in inventory:
+		if inventory[consumable] > 0:
+			var item_text = str(inventory[consumable]) + "x " + consumable.name
 			var item_display = {"text": item_text, "display":consumable.inv_icon, "item":consumable}
 			items_available.append(item_display)
 
