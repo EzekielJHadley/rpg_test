@@ -1,6 +1,8 @@
 extends Node
 
-enum Dmg_type {NONE, PHYSICAL, FIRE, ICE, LIGHT}
+enum Dmg_type {NONE, PHYSICAL, FIRE, ICE, POISON, LIGHT}
+
+enum Status_effect {NONE, POISON, BURN, STUN, CONFUSE, BLIND, SILENCE}
 
 func string_to_Dmg_type(type_str: String) -> int:
 	var ret: Dmg_type
@@ -11,6 +13,8 @@ func string_to_Dmg_type(type_str: String) -> int:
 			ret = Dmg_type.FIRE
 		"ice":
 			ret = Dmg_type.ICE
+		"poison":
+			ret = Dmg_type.POISON
 		_:
 			ret = Dmg_type.NONE
 	
@@ -25,6 +29,8 @@ func Dmg_type_to_string(dmg_type: Dmg_type) ->  String:
 			ret = "fire"
 		Dmg_type.ICE:
 			ret = "ice"
+		Dmg_type.POISON:
+			ret = "poison"
 		_:
 			ret = "None"
 	

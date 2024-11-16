@@ -27,11 +27,8 @@ var SPD: int
 var MGK: int
 
 var spells_available: Dictionary = {}
-var passive_skills: Array = []
+var modifiers: Char_mods
 
-var vulnerability: Array = []
-var resistant: Array = []
-var immune: Array = []
 
 var SPRITE: String
 var sprite_width: int
@@ -39,6 +36,7 @@ var sprite_height: int
 var PORTRAIT: String
 
 func _init(stats_file: String) -> void:
+	modifiers = Char_mods.new()
 	load_from_json(stats_file)
 
 func add_spell(new_spell: Magic):
@@ -52,7 +50,7 @@ func get_spell_list() -> Dictionary:
 	
 func calculate_stats():
 	var aggregator = Stat_mod_aggregator.new({"HP_max":HP_base, "MP_max":MP_base,"STR":STR_base, "MGK":MGK_base})
-	for passive in passive_skills:
+	for passive in modifiers.get_mods():
 		passive.stats_modifier(aggregator)
 	var updated_stats = aggregator.calculate()
 	#now assigned the calculated skills to the new skills
@@ -76,7 +74,7 @@ func base_attk() -> Globals.Damage_info:
 	var base_dmg = Globals.Damage_info.new(Globals.Dmg_type.PHYSICAL, dmg, [])
 	
 	var aggregator = Dmg_mod_aggregator.new(base_dmg)
-	for passive in passive_skills:
+	for passive in modifiers.get_mods():
 		passive.dmg_modifier(aggregator)
 		
 	var final_dmg = aggregator.calculate()
@@ -88,7 +86,7 @@ func magic_attk(spell_name: String) -> Globals.Damage_info:
 	MP -= spell.cost
 	
 	var aggregator = Dmg_mod_aggregator.new(spell.get_spell_attack(self))
-	for passive in passive_skills:
+	for passive in modifiers.get_mods():
 		passive.magic_modifiers(aggregator)
 	
 	var final_spell_attk = aggregator.calculate()
@@ -97,7 +95,7 @@ func magic_attk(spell_name: String) -> Globals.Damage_info:
 	
 func defend(incoming_attack: Globals.Damage_info):
 	var aggregator = Def_mod_aggregator.new(incoming_attack)
-	for passive in passive_skills:
+	for passive in modifiers.get_mods():
 		passive.def_modifier(aggregator)
 	
 	var final_dmg = aggregator.calculate()
@@ -119,17 +117,6 @@ func load_from_json(file_name: String):
 	SPD_base = stats_value.get("SPD", 1)
 	MGK_base = stats_value.get("MGK", 1)
 	
-	#TODO: turn vuln/resist/immune into passive modifiers
-	var vuln: Array = stats_value.get("vulnerability", [])
-	for type in vuln:
-		vulnerability.append(Globals.string_to_Dmg_type(type))
-	var res: Array = stats_value.get("resistant", [])
-	for type in res:
-		resistant.append(Globals.string_to_Dmg_type(type))
-	var immn: Array = stats_value.get("immune", [])
-	for type in immn:
-		immune.append(Globals.string_to_Dmg_type(type))
-	
   
 	SPRITE = stats_value.get("SPRITE", "res://resource/Sprites/icon.svg")
 	sprite_width = stats_value.get("sprite_width", 1)
@@ -140,7 +127,7 @@ func load_from_json(file_name: String):
 	#passives
 	for skill_name in stats_value.get("Passives", []):
 		var skill = load("res://characters/modifiers/" + skill_name + ".gd").new()
-		passive_skills.append(skill)
+		modifiers.add_mod(skill)
 
 	
 	calculate_stats()

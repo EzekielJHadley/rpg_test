@@ -17,5 +17,9 @@ func magic_attack(target: Character, spell: String):
 	await super(target, spell)
 	end_turn()
 
+func use_item(target: Character, item: Consumable):
+	await super(target, item)
+	end_turn()
+
 func character_dead():
 	scale.y = -1
