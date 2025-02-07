@@ -7,7 +7,7 @@ func _init() -> void:
 	type = "dialogue"
 	
 	var json = JSON.new()
-	var json_text = FileAccess.open("res://characters/interupts/half_health.json", FileAccess.READ).get_as_text()
+	var json_text = FileAccess.open("res://stats/interupts/half_health.json", FileAccess.READ).get_as_text()
 	var error = json.parse(json_text)
 	assert(error == OK)
 	dialogue = json.data

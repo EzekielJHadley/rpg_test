@@ -16,4 +16,4 @@ func use_item(item: Consumable):
 		return item.use_item()
 	else:
 		print("Error!: Item does not exist or you are out of item.")
-		return Globals.Damage_info.new(0, 0, [])
+		return Damage_info.new(0, 0, [])

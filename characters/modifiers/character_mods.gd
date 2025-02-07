@@ -5,7 +5,7 @@ var passive_mods: Array = []
 var status_effects: Dictionary = {}
 
 func _init():
-	for effect in Globals.Status_effect.keys():
+	for effect in Damage_info.Status_effect.keys():
 		status_effects.get_or_add(effect)
 
 func add_mod(mod: Modifiers):

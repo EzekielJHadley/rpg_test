@@ -3,8 +3,8 @@ extends Modifiers
 
 func _init():
 	#change base attack to do fire damage
-	attk_mods.append({"dmg_type":Globals.Dmg_type.FIRE})
+	attk_mods.append({"dmg_type":Damage_info.Dmg_type.FIRE})
 	#take half damage, multiplicative, from fire attacks
-	def_mods.append({"operator":Mod_calculator.MULTIPLIER, "modifier":-0.5,"dmg_type":Globals.Dmg_type.FIRE})
+	def_mods.append({"operator":Mod_calculator.MULTIPLIER, "modifier":-0.5,"dmg_type":Damage_info.Dmg_type.FIRE})
 	#take half damage, multiplicative, from fire attacks
-	def_mods.append({"operator":Mod_calculator.MULTIPLIER, "modifier":1,"dmg_type":Globals.Dmg_type.ICE})
+	def_mods.append({"operator":Mod_calculator.MULTIPLIER, "modifier":1,"dmg_type":Damage_info.Dmg_type.ICE})

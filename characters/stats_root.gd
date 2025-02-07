@@ -69,9 +69,9 @@ func calculate_stats():
 	SPD = updated_stats.get("SPD", SPD_base)
 	MGK = updated_stats.get("MGK", MGK_base)
 
-func base_attk() -> Globals.Damage_info:
+func base_attk() -> Damage_info:
 	var dmg = STR
-	var base_dmg = Globals.Damage_info.new(Globals.Dmg_type.PHYSICAL, dmg, [])
+	var base_dmg = Damage_info.new(Damage_info.Dmg_type.PHYSICAL, dmg, [])
 	
 	var aggregator = Dmg_mod_aggregator.new(base_dmg)
 	for passive in modifiers.get_mods():
@@ -81,8 +81,8 @@ func base_attk() -> Globals.Damage_info:
 	
 	return final_dmg
 
-func magic_attk(spell_name: String) -> Globals.Damage_info:
-	var spell:Magic = spells_available.get(spell_name, Magic.new("null", Globals.Dmg_type.NONE, "STR", 0))
+func magic_attk(spell_name: String) -> Damage_info:
+	var spell:Magic = spells_available.get(spell_name, Magic.new("null", Damage_info.Dmg_type.NONE, "STR", 0))
 	MP -= spell.cost
 	
 	var aggregator = Dmg_mod_aggregator.new(spell.get_spell_attack(self))
@@ -90,16 +90,15 @@ func magic_attk(spell_name: String) -> Globals.Damage_info:
 		passive.magic_modifiers(aggregator)
 	
 	var final_spell_attk = aggregator.calculate()
-	
 	return final_spell_attk
 	
-func defend(incoming_attack: Globals.Damage_info):
+func defend(incoming_attack: Damage_info):
 	var aggregator = Def_mod_aggregator.new(incoming_attack)
 	for passive in modifiers.get_mods():
 		passive.def_modifier(aggregator)
 	
 	var final_dmg = aggregator.calculate()
-	print(character_name + ": I'm taking: " + str(final_dmg.damage) + " " + Globals.Dmg_type_to_string(final_dmg.dmg_type) + " damage!")
+	print(character_name + ": I'm taking: " + str(final_dmg.damage) + " " + Damage_info.Dmg_type_to_string(final_dmg.element) + " damage!")
 	HP -= final_dmg.damage
 	
 func load_from_json(file_name: String):

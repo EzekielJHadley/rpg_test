@@ -36,7 +36,7 @@ func Dmg_type_to_string(dmg_type: Dmg_type) ->  String:
 	
 	return ret
 
-class Damage_info:
+class Damage_info0:
 	var dmg_type:int
 	var damage:int
 	var status_effects: Array

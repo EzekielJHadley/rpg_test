@@ -19,7 +19,7 @@ func _init(spell_name: String, element_type: int, stat: String, mp_cost: int):
 func get_scene() -> Resource:
 	return load(spell_scene)
 
-func get_spell_attack(stats: Stats) -> Globals.Damage_info:
+func get_spell_attack(stats: Stats) -> Damage_info:
 	var damage: int = stats.get(base_stat)
 	
-	return Globals.Damage_info.new(element, damage, effects)
+	return Damage_info.new(element, damage, effects)
