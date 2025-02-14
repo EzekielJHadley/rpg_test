@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ptmwds7cnfh0"]
+
+[ext_resource type="Script" path="res://maps/scene_changer.gd" id="1_oita7"]
+
+[node name="scene_changer" type="Node2D" groups=["doors"]]
+script = ExtResource("1_oita7")

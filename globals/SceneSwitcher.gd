@@ -10,7 +10,7 @@ func _ready():
 func change_level(level_name: String, data: Dictionary, level_persist: bool):
 	var next_level
 	if level_name not in old_scene:
-		var next_level_tscn: String = "res://level/" + level_name + ".tscn"
+		var next_level_tscn: String = "res://" + level_name + ".tscn"
 		
 		next_level = load(next_level_tscn).instantiate()
 	else:
