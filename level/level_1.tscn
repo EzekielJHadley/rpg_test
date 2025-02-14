@@ -31,7 +31,7 @@ offset_top = 251.0
 offset_right = 867.0
 offset_bottom = 294.0
 text = "Next Level"
-level_name = "level_2"
+level_name = "level/level_2"
 data = {
 "name": "Another test"
 }
@@ -43,12 +43,21 @@ offset_top = 330.0
 offset_right = 869.0
 offset_bottom = 373.0
 text = "Battle"
-level_name = "/battle/grass_level_battle"
+level_name = "level/battle/grass_level_battle"
 data = {
 "enemies": ["res://stats/bosses/goat_boss.json", "res://stats/enemies/slime_girl.json", "res://stats/enemies/zombie.json"]
 }
 scene_persist = true
 
+[node name="change_scene2" parent="." index="3" instance=ExtResource("3_y0ncs")]
+offset_left = 731.0
+offset_top = 406.0
+offset_right = 869.0
+offset_bottom = 449.0
+text = "Map"
+level_name = "maps/map1"
+
 [connection signal="pressed" from="VBoxContainer/increment" to="." method="increment_button"]
 [connection signal="change_scene" from="change_scene" to="." method="change_scene"]
 [connection signal="change_scene" from="battle" to="." method="change_scene"]
+[connection signal="change_scene" from="change_scene2" to="." method="change_scene"]

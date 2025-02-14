@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fiie551mac13"]
+
+[ext_resource type="PackedScene" uid="uid://ptmwds7cnfh0" path="res://maps/scene_changer.tscn" id="1_sphxe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw0ap"]
+size = Vector2(256, 64)
+
+[node name="scene_changer" instance=ExtResource("1_sphxe")]
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0, 65)
+shape = SubResource("RectangleShape2D_lw0ap")
+
+[connection signal="body_entered" from="Area2D" to="." method="change"]

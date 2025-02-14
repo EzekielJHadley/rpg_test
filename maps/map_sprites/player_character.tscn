@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhpojtablvsfg"]
+
+[ext_resource type="Script" path="res://maps/map_sprites/player_character.gd" id="1_tojb5"]
+[ext_resource type="Texture2D" uid="uid://k0kqq405jcrg" path="res://resource/Sprites/4-sample.png" id="2_roml5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubavt"]
+size = Vector2(30, 30)
+
+[node name="leader_root" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_tojb5")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.199219, 0.189258)
+texture = ExtResource("2_roml5")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_ubavt")
