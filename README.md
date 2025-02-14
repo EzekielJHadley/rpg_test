@@ -10,11 +10,12 @@ TODO list:
 	_includes text display
 - [x] magic and weakness/resistance to elements
 - [x] passive attributes
-- [ ] temporary effects
+- [x] temporary effects
 - [x] turn order determiner
 - [ ] create random encounter table
 - [ ] make json available outside compiled binary
 - [ ] over world map
+- [ ] generalize UI hud (i.e. dialouge box separate from combat box)
 - [ ] building interiors
 - [ ] level mechanics
 - [ ] combat animations

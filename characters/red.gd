@@ -23,7 +23,7 @@ func _ready():
 func _exit_tree() -> void:
 	instances = max(instances - 1, 0)
 	
-func take_dmg(attk: Globals.Damage_info):
+func take_dmg(attk: Damage_info):
 	super(attk)
 
 func start_turn(character_list: Dictionary):

@@ -1,10 +1,20 @@
-extends Node
+extends RefCounted
+class_name Damage_info
 
 enum Dmg_type {NONE, PHYSICAL, FIRE, ICE, POISON, LIGHT}
 
 enum Status_effect {NONE, POISON, BURN, STUN, CONFUSE, BLIND, SILENCE}
 
-func string_to_Dmg_type(type_str: String) -> int:
+var element:int
+var damage:int
+var status_effects: Array
+
+func _init(type:int, dmg: int, status: Array) -> void:
+	element = type
+	damage = dmg
+	status_effects = status
+
+static func string_to_Dmg_type(type_str: String) -> int:
 	var ret: Dmg_type
 	match type_str.to_lower():
 		"physical":
@@ -17,12 +27,12 @@ func string_to_Dmg_type(type_str: String) -> int:
 			ret = Dmg_type.POISON
 		_:
 			ret = Dmg_type.NONE
-	
+
 	return ret
 
-func Dmg_type_to_string(dmg_type: Dmg_type) ->  String:
+static func Dmg_type_to_string(element_val: Dmg_type) ->  String:
 	var ret: String
-	match dmg_type:
+	match element_val:
 		Dmg_type.PHYSICAL:
 			ret = "physical"
 		Dmg_type.FIRE:
@@ -33,15 +43,9 @@ func Dmg_type_to_string(dmg_type: Dmg_type) ->  String:
 			ret = "poison"
 		_:
 			ret = "None"
-	
+
 	return ret
 
-class Damage_info:
-	var dmg_type:int
-	var damage:int
-	var status_effects: Array
-	
-	func _init(type:int, dmg: int, status: Array) -> void:
-		dmg_type = type
-		damage = dmg
-		status_effects = status
+
+
+

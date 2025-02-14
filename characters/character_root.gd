@@ -15,7 +15,7 @@ func _ready():
 	texture = load(stats.SPRITE)
 	hframes = stats.sprite_width
 	vframes = stats.sprite_height
-	offset.y = - texture.get_height()/(2 * vframes)
+	offset.y = - texture.get_height()/(2.0 * vframes)
 	$StatusDisplay.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE )
 	$StatusDisplay.position.y = 20
 
@@ -34,7 +34,7 @@ func end_turn():
 
 func attack(target: Character):
 	print(name + " is attacking")
-	var atk_info: Globals.Damage_info = stats.base_attk()
+	var atk_info: Damage_info = stats.base_attk()
 	#play attack animation
 	await play_attack_animation()
 	var base_attk = {"target":target, "data":atk_info}
@@ -47,7 +47,7 @@ func magic_attack(target: Character, spell: String):
 	print(name + " is using: " + spell)
 	#get spell scene, add to scene
 	#await spell animation
-	var atk_info = await stats.magic_attk(spell)
+	var atk_info = stats.magic_attk(spell)
 	var magic_attk = {"target":target, "data":atk_info}
 	#attach spell scene and play animation
 	await play_attack_animation() #using the animation stored in the magic atk_info
@@ -60,10 +60,10 @@ func use_item(target: Character, item: Consumable):
 	await play_attack_animation()
 	Event.emit(self, "attack", item_attack)
 
-func play_magic_animation(animation = null):
+func play_magic_animation(_animation = null):
 	await get_tree().create_timer(1).timeout
 
-func take_dmg(attk: Globals.Damage_info):	
+func take_dmg(attk: Damage_info):	
 	stats.defend(attk)
 	for effect in attk.status_effects:
 		apply_effect(effect)

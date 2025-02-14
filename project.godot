@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="RPG_test"
-run/main_scene="res://scene_switcher.tscn"
+run/main_scene="res://globals/scene_switcher.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://resource/Sprites/icon.svg"
 
 [autoload]
 
-PlayerTeam="*res://player_team.gd"
-Globals="*res://globals.gd"
+PlayerTeam="*res://globals/player_team.gd"
 
 [display]
 

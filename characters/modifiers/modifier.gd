@@ -1,7 +1,7 @@
 extends RefCounted
 class_name Modifiers
 
-signal mod_animation_start
+#signal mod_animation_start
 
 #contains dicts with "stat to modify" "how to modify value" and "how much to modify it"
 var stat_mods: Array = []
@@ -15,7 +15,7 @@ var def_mods: Array = []
 var priority: int = 10
 
 
-func on_turn_start(character: Character):
+func on_turn_start(_character: Character):
 	pass
 
 func stats_modifier(calc: Stat_mod_aggregator):

@@ -55,6 +55,6 @@ effect types
 
 
 
-	print("Fire enum is: " + str(Globals.Dmg_type.FIRE))
-	print(Globals.Dmg_type.keys()[Globals.Dmg_type.FIRE] + " enum is: " + str(Globals.Dmg_type["FIRE"]))
+	print("Fire enum is: " + str(Damage_info.Dmg_type.FIRE))
+	print(Damage_info.Dmg_type.keys()[Damage_info.Dmg_type.FIRE] + " enum is: " + str(Damage_info.Dmg_type["FIRE"]))
 AmyUpdateTest

@@ -14,4 +14,4 @@ func use_item():
 	var out_effect = []
 	for effect in effects:
 		out_effect.append(effect.new(""))
-	return Globals.Damage_info.new(Globals.Dmg_type.NONE, 0, out_effect)
+	return Damage_info.new(Damage_info.Dmg_type.NONE, 0, out_effect)
