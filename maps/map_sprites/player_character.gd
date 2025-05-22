@@ -45,3 +45,10 @@ func follow_leader(leader_pos: Vector2):
 	if new_dir.length() > keep_away:
 		velocity = new_dir.normalized() * SPEED * accel
 		accel += 0.1
+		
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and not follower:
+		for obj in $interact.get_overlapping_bodies():
+			if obj.has_method("interact"):
+				obj.interact()

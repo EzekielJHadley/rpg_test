@@ -58,3 +58,51 @@ effect types
 	print("Fire enum is: " + str(Damage_info.Dmg_type.FIRE))
 	print(Damage_info.Dmg_type.keys()[Damage_info.Dmg_type.FIRE] + " enum is: " + str(Damage_info.Dmg_type["FIRE"]))
 AmyUpdateTest
+
+
+dialogue
+
+assumptions
+	SPEAKER will always be the one with the JSON (i.e. it is the one that passes the json to INTERACTION object)
+	The LISTENER is any character listed in the DIALOGUE object, that is not the SPEAKER
+	
+	INTERACTION object is separate from the UI, it will pass single DIALOGUE object to UI
+		the UI will parse the DIALOGUE object
+	
+	Target is specified in the EFFECT in the DIALOGUE object, INTERACTION object needs to determine how that resolves
+		i.e. turning the string into target and effect  
+	
+INTERACTION object
+	SPEAKER, who is talking and the source of the JSON file
+	
+	read in the json object, sets the SPEAKER and builds the DIALOGUE DATA STRUCTURE
+		which consists of linked DIALOGUE objects
+
+dialogue object
+	OWNER (SPEAKER or LISTENER)
+		gets portrait from here
+	dialogue text
+	dictionary -> reply : next dialogue object
+	EFFECT: its own object that specifies WHO, WHAT, and HOW MUCH  
+	
+
+
+
+1) Speaker loads JSON into conversation object
+
+2) passes conversation object to Scene
+	scene passes in the list of available characters
+	sends first Dialogue object to UI
+	
+3) UI displays text, character portrait, and a list of responses for the player
+	As UI displays text it sends Signal up to Scene, to tell speaker to Emote
+	When response is Selected, UI Signals Scene with choice
+	
+4) Scene uses Choice to tell Player Character or Ally to emote and any damage to any character
+5) Scene feeds choice into conversation object to get next Dialogue object, goto step 2
+
+6) The Last Dialogue object closes UI
+
+Dialogue  Object knows who is who from list of available characters given to the Conversation object by Scene
+	from the name text in the JSON it will find the first valid name_## from the list and use that
+

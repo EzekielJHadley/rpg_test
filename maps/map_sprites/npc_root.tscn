@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cor2iaekyj0gd"]
+
+[ext_resource type="Script" path="res://maps/map_sprites/npc_root.gd" id="1_a2phw"]
+[ext_resource type="Texture2D" uid="uid://sjvh432gxqnd" path="res://resource/Sprites/yellow.png" id="1_qpsne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdh8q"]
+size = Vector2(16, 16)
+
+[node name="NPC_root" type="CharacterBody2D" groups=["overworld_npc"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_a2phw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_qpsne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fdh8q")

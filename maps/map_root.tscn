@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://d16hordh3k35b"]
+[gd_scene load_steps=47 format=3 uid="uid://d16hordh3k35b"]
 
 [ext_resource type="PackedScene" uid="uid://ca1dl1df1sg8h" path="res://level/level_root.tscn" id="1_k7fjx"]
 [ext_resource type="Texture2D" uid="uid://cuqn65uv20hw7" path="res://resource/tilemaps/DD_garden_elements.png" id="2_8gm55"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://7uj4oupny7np" path="res://resource/tilemaps/FL_stone_gray.png" id="5_nxqg7"]
 [ext_resource type="PackedScene" uid="uid://bhpojtablvsfg" path="res://maps/map_sprites/player_character.tscn" id="6_74mxt"]
 [ext_resource type="Texture2D" uid="uid://cbqgu5af5yf5i" path="res://resource/Sprites/4-sample-alt.png" id="8_saq1p"]
+[ext_resource type="PackedScene" uid="uid://d0nd5bbxlewkp" path="res://UI/dialogue.tscn" id="9_0sxjn"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_y46ex"]
 tile_data = PackedInt32Array(65536, 851968, 13, 131072, 851968, 14, 1, 917504, 12, 65537, 917504, 13, 131073, 917504, 14, 2, 983040, 12, 65538, 983040, 13, 131074, 983040, 14)
@@ -2062,6 +2063,12 @@ position = Vector2(885, 548)
 zoom = Vector2(2, 2)
 
 [node name="door" type="Node2D" parent="." index="2"]
+
+[node name="Interactables" type="Node2D" parent="." index="3"]
+
+[node name="dialogue" parent="." index="4" instance=ExtResource("9_0sxjn")]
+process_mode = 3
+visible = false
 
 [connection signal="follow" from="PCs/player1" to="PCs/player2" method="follow_leader"]
 

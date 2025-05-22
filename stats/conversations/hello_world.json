@@ -1,0 +1,16 @@
+{
+    "_start":{
+        "speaker":"Guy",
+        "dialogue":"Hello beautiful world!",
+        "responses": ["Howdy", "Swords"]
+    },
+    "Howdy":{
+        "speaker":"Hero",
+        "dialogue": "Howdy World!"
+    },
+    "Swords":{
+        "speaker":"Yellow",
+        "dialogue": "I like swords!",
+        "responses": ["_start"]
+    }
+}

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0nd5bbxlewkp"]
+
+[ext_resource type="Script" path="res://UI/dialogue.gd" id="1_563t8"]
+
+[node name="dialogue" type="CanvasLayer"]
+script = ExtResource("1_563t8")
+
+[node name="dialogue_box" type="PanelContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.79
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 90.8
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="dialogue" type="HBoxContainer" parent="dialogue_box"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speaker_portrait" type="TextureRect" parent="dialogue_box/dialogue"]
+layout_mode = 2
+
+[node name="text_box" type="VBoxContainer" parent="dialogue_box/dialogue"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="speaker" type="RichTextLabel" parent="dialogue_box/dialogue/text_box"]
+layout_mode = 2
+text = "Player_name placeholder"
+fit_content = true
+
+[node name="conversation" type="RichTextLabel" parent="dialogue_box/dialogue/text_box"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+drag_and_drop_selection_enabled = false
+visible_characters_behavior = 1
+
+[node name="choices" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1

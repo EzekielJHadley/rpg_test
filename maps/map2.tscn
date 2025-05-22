@@ -19,8 +19,10 @@ position = Vector2(563, 673)
 position = Vector2(562, 670)
 level_name = "maps/map1"
 
-[node name="PhGoatMidBoss" type="Sprite2D" parent="." index="3"]
+[node name="PhGoatMidBoss" type="Sprite2D" parent="Interactables" index="0"]
 position = Vector2(562, 336)
 texture = ExtResource("3_mh4nq")
 hframes = 8
 vframes = 4
+
+[editable path="PCs/player2"]

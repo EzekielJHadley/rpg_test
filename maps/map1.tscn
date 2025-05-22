@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://cyjbhnjbbgs3"]
+[gd_scene load_steps=4 format=4 uid="uid://cyjbhnjbbgs3"]
 
 [ext_resource type="PackedScene" uid="uid://d16hordh3k35b" path="res://maps/map_root.tscn" id="1_rgwlc"]
 [ext_resource type="PackedScene" uid="uid://fiie551mac13" path="res://maps/scene_changer_area.tscn" id="2_nvud7"]
+[ext_resource type="PackedScene" uid="uid://cor2iaekyj0gd" path="res://maps/map_sprites/npc_root.tscn" id="3_lf85n"]
 
 [node name="map_root" instance=ExtResource("1_rgwlc")]
 
@@ -14,3 +15,8 @@ position = Vector2(260, 548)
 [node name="exit1" parent="door" index="0" instance=ExtResource("2_nvud7")]
 position = Vector2(1183, 727)
 level_name = "maps/map2"
+
+[node name="Guy" parent="Interactables" index="0" instance=ExtResource("3_lf85n")]
+position = Vector2(778, 54)
+
+[editable path="PCs/player2"]
