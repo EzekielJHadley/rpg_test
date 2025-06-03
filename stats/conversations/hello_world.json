@@ -2,7 +2,7 @@
     "_start":{
         "speaker":"Guy",
         "dialogue":"Hello beautiful world!",
-        "responses": ["Howdy", "Swords"]
+        "responses": ["Howdy", "Swords", "Secret"]
     },
     "Howdy":{
         "speaker":"Hero",
@@ -12,5 +12,11 @@
         "speaker":"Yellow",
         "dialogue": "I like swords!",
         "responses": ["_start"]
+    },
+    "Secret":{
+        "speaker":"Hero",
+        "dialogue": "This is a secret response",
+        "responses": ["_start"],
+        "when_flag":[{"flag":"flag_test"}]
     }
 }
