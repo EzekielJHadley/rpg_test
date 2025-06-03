@@ -41,7 +41,8 @@ func load_dialogue(text_packet: Dialogue):
 	$dialogue_box/dialogue/speaker_portrait.texture = load(text_packet.portrait)
 	
 	clear()
-	for resp:String in text_packet.get_responses():
+	var text_responses = text_packet.get_valid_responses()
+	for resp:String in text_responses:
 		var choice := Button.new()
 		if resp.begins_with("_"):
 			auto_continue = resp
@@ -50,7 +51,7 @@ func load_dialogue(text_packet: Dialogue):
 			choice.text = resp
 			choice.pressed.connect(func(): Event.emit("next_dialogue", {"choice": resp}))
 			$choices.add_child(choice)
-	if len(text_packet.get_responses()) == 0:
+	if len(text_responses) == 0:
 		end_conversation = true
 
 func _input(event: InputEvent) -> void:

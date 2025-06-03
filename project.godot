@@ -18,6 +18,7 @@ config/icon="res://resource/Sprites/icon.svg"
 [autoload]
 
 PlayerTeam="*res://globals/player_team.gd"
+GameFlags="*res://globals/game_flags.gd"
 
 [display]
 
