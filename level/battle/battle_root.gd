@@ -58,6 +58,8 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 			$Selector.visible = true
 			current_char = character
 			print("Player's turn")
+		"select_target":
+			pass
 		"attack":
 			print("attacking: " + data["target"].name)
 			data["target"].take_dmg(data["data"])
