@@ -1,19 +1,21 @@
 extends Level_root
 
 var current_char: Character = null
-var current_target: Dictionary = {"index":0, "target":null, "team":"Enemies"}
+var current_target: Dictionary = {"index":0, "targets":[], "team":"Enemies"}
 var character_list: Dictionary = {"Allies":[], "Enemies":[]}
 var turn_order: Array = []
 var num_fighters: Dictionary = {"Allies":0, "Enemies":0}
 var interupt: bool = false
 var interupt_signal:Signal
+var select_mode: bool = false
+var selected_attack: Dictionary
 
 func _ready() -> void:
 	add_players()
 	calc_turn_order()
 	for fighter: Character in turn_order:
 		fighter.Event.connect(event_handler)
-	current_target["target"] = character_list["Enemies"][0]
+	$Combat.Event.connect(event_handler)
 	battle_loop()
 
 func set_up(data: Dictionary):
@@ -52,17 +54,22 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 	match event_type:
 		#1) player turn
 		"player_turn":
-			$Combat.add_spells(character.stats.get_spell_list())
+			$Combat.add_attacks(character.stats.get_attacks())
 			$Combat.add_items(PlayerTeam.inventory.consumables)
 			$Combat.display(event_type, {})
-			$Selector.visible = true
 			current_char = character
 			print("Player's turn")
 		"select_target":
-			pass
+			selected_attack = data
+			change_target(0)
+				
+			select_mode = true
+			$Combat.visible = false
 		"attack":
-			print("attacking: " + data["target"].name)
-			data["target"].take_dmg(data["data"])
+			var attack_targets = data["targets"]
+			for target: Character in attack_targets:
+				print("attacking: " + target.name)
+				target.take_dmg(data["data"])
 		"dead":
 			print(character.name + " is dead!")
 			var index = character_list["Enemies"].find(character)
@@ -85,7 +92,6 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 			interupt = true
 		_:
 			print("ERROR, should not get here")
-	#2) text interupts
 	#3) spawn helpers
 	
 func add_players():
@@ -129,49 +135,55 @@ func calc_turn_order():
 	turn_order.sort_custom(sort_characters)
 
 
-func use_attack_action():
-	$Selector.visible = false
-	$Combat.visible = false
-	await current_char.attack(current_target["target"])
-
-func use_magic_attack(spell_name: String):
-	$Selector.visible = false
-	$Combat.visible = false
-	await current_char.magic_attack(current_target["target"], spell_name)
-	
-func use_item(item: Consumable) -> void:
-	$Selector.visible = false
-	$Combat.visible = false
-	await current_char.use_item(current_target["target"], item)
-
 func retarget():
-	if current_target["target"] in character_list[current_target["team"]]:
-		var index = character_list[current_target["team"]].find(current_target["target"])
+	if current_target["targets"][0] in character_list[current_target["team"]]:
+		var index = character_list[current_target["team"]].find(current_target["targets"][0])
 		current_target["index"] = index
 	elif len(character_list[current_target["team"]]) > 0:
 		current_target["index"] = current_target["index"] % num_fighters[current_target["team"]]
-		current_target["target"] = character_list[current_target["team"]][current_target["index"]]
-		$Selector.position = current_target["target"].global_position
+		change_target(0)
+		
+func change_target(move_up:int = 1, new_fighter_team: String = ""):
+		# disapear the indicator for the current targets	
+		var figher_targets = current_target["targets"]
+		for fighter in figher_targets:
+			fighter.show_selector(false)
+		# set the target team
+		var fighter_team: String
+		if new_fighter_team == "":
+			fighter_team = current_target["team"]
+		else:
+			fighter_team = new_fighter_team
+		
+		# adjust the "base" index
+		var fighter_index = current_target["index"]
+		fighter_index = (fighter_index + move_up) % num_fighters[fighter_team]
+		
+		# select the new targets
+		var new_targets = []
+		for i in range(selected_attack.get("num_targets", 1)):
+			var fighter = character_list[fighter_team][(fighter_index + i) % num_fighters[fighter_team]]
+			fighter.show_selector(true)
+			new_targets.append(fighter)
+			
+		current_target = {"index":fighter_index, "targets":new_targets, "team":fighter_team}
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_pressed():
-		var fighter_index = current_target["index"]
-		var fighter_target = current_target["target"]
-		var fighter_team = current_target["team"]
-		if event.is_action_pressed("select_previous"):
-			fighter_index = (fighter_index - 1) % num_fighters[fighter_team]
-		elif event.is_action_pressed("select_next"):
-			fighter_index = (fighter_index + 1) % num_fighters[fighter_team]
-		elif event.is_action_pressed("select_allies"):
-			$Selector.scale.x = -1
-			fighter_team = "Allies"
-			fighter_index = fighter_index % num_fighters[fighter_team]
-		elif event.is_action_pressed("select_enemies"):
-			$Selector.scale.x = 1
-			fighter_team = "Enemies"
-			fighter_index = fighter_index % num_fighters[fighter_team]
-		
-		fighter_target = character_list[fighter_team][fighter_index]
-		$Selector.position = fighter_target.global_position
-		current_target = {"index":fighter_index, "target":fighter_target, "team":fighter_team}
-		print("New target: " + str(current_target))
+		if event.is_action_pressed("select_previous") and select_mode:
+			change_target(-1)
+		elif event.is_action_pressed("select_next") and select_mode:
+			change_target(1)
+		elif event.is_action_pressed("select_allies") and select_mode:
+			change_target(0, "Allies")
+		elif event.is_action_pressed("select_enemies") and select_mode:
+			change_target(0, "Enemies")
+		elif event.is_echo():
+			print("Key press has echoed")
+		elif event.is_action_pressed("ui_accept") and select_mode:
+			for fighter_target in current_target["targets"]: 
+				print("attacking: " + fighter_target.name)
+			await current_char.attack(current_target["targets"], selected_attack)
+			select_mode = false
+			for target in current_target["targets"]:
+				target.show_selector(false)

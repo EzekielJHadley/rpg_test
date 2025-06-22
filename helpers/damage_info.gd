@@ -3,6 +3,11 @@ class_name Damage_info
 
 enum Dmg_type {NONE, PHYSICAL, FIRE, ICE, POISON, LIGHT}
 
+enum Range_type {NONE, CLOSE, MID, FAR}
+# Made ALL special (-1)
+# 1 should be default, for more an integer will suffice
+enum target_type {ALL, NONE = 0, SINGLE, DOUBLE, TRIPLE} 
+
 enum Status_effect {NONE, POISON, BURN, STUN, CONFUSE, BLIND, SILENCE}
 
 var element:int

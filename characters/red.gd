@@ -15,6 +15,11 @@ func _ready():
 	vframes = stats.sprite_height
 	offset.y = - texture.get_height()/(2 * vframes)
 	scale = Vector2(-2,2)
+	$Border.scale = Vector2(0.5, 0.5)
+	$Border.offset.y = - texture.get_height()/(2 * vframes) + 64
+	$Selector.position.x = - texture.get_width()/(2.0 * hframes)
+	$Selector.position.y = - texture.get_height()/(3.0 * vframes)
+	$Selector.scale = Vector2(0.5, 0.5)
 	$StatusDisplay.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE )
 	$StatusDisplay.position.y = 20
 	#$StatusDisplay.set_size(Vector2(texture.get_width()/hframes, 20))
@@ -29,5 +34,5 @@ func take_dmg(attk: Damage_info):
 func start_turn(character_list: Dictionary):
 	await super(character_list)
 	var target = character_list["Allies"][randi() % len(character_list["Allies"])]
-	await attack(target)
+	await attack([target], {"attack":"base_attack"})
 	end_turn()
