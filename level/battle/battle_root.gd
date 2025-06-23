@@ -161,7 +161,12 @@ func change_target(move_up:int = 1, new_fighter_team: String = ""):
 		
 		# select the new targets
 		var new_targets = []
-		for i in range(selected_attack.get("num_targets", 1)):
+		var num_targets = selected_attack.get("num_targets", 1)
+		if num_targets == Magic.target_type.ALL:
+			num_targets = num_fighters[fighter_team]
+		elif num_targets > num_fighters[fighter_team]:
+			num_targets = num_fighters[fighter_team]
+		for i in range(num_targets):
 			var fighter = character_list[fighter_team][(fighter_index + i) % num_fighters[fighter_team]]
 			fighter.show_selector(true)
 			new_targets.append(fighter)

@@ -1,6 +1,11 @@
 extends RefCounted
 class_name Magic
 
+enum Range_type {NONE, CLOSE, MID, LONG}
+# Made ALL special (-1)
+# 1 should be default, for more an integer will suffice
+enum target_type {ALL=-1, NONE = 0, SINGLE, DOUBLE, TRIPLE} 
+
 var name: String
 var element: int
 var base_stat: String
