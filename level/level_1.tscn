@@ -23,13 +23,16 @@ vertical_alignment = 1
 [node name="increment" type="Button" parent="VBoxContainer" index="1"]
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_right = NodePath("../../scene2_test")
 text = "Increment"
 
-[node name="change_scene" parent="." index="1" instance=ExtResource("3_y0ncs")]
+[node name="scene2_test" parent="." index="1" instance=ExtResource("3_y0ncs")]
 offset_left = 729.0
 offset_top = 251.0
 offset_right = 867.0
 offset_bottom = 294.0
+focus_neighbor_left = NodePath("../VBoxContainer/increment")
+focus_neighbor_bottom = NodePath("../battle")
 text = "Next Level"
 level_name = "level/level_2"
 data = {
@@ -42,6 +45,8 @@ offset_left = 731.0
 offset_top = 330.0
 offset_right = 869.0
 offset_bottom = 373.0
+focus_neighbor_top = NodePath("../scene2_test")
+focus_neighbor_bottom = NodePath("../map")
 text = "Battle"
 level_name = "level/battle/grass_level_battle"
 data = {
@@ -49,15 +54,16 @@ data = {
 }
 scene_persist = true
 
-[node name="change_scene2" parent="." index="3" instance=ExtResource("3_y0ncs")]
+[node name="map" parent="." index="3" instance=ExtResource("3_y0ncs")]
 offset_left = 731.0
 offset_top = 406.0
 offset_right = 869.0
 offset_bottom = 449.0
+focus_neighbor_top = NodePath("../battle")
 text = "Map"
 level_name = "maps/map1"
 
 [connection signal="pressed" from="VBoxContainer/increment" to="." method="increment_button"]
-[connection signal="change_scene" from="change_scene" to="." method="change_scene"]
+[connection signal="change_scene" from="scene2_test" to="." method="change_scene"]
 [connection signal="change_scene" from="battle" to="." method="change_scene"]
-[connection signal="change_scene" from="change_scene2" to="." method="change_scene"]
+[connection signal="change_scene" from="map" to="." method="change_scene"]

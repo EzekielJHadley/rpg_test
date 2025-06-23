@@ -173,7 +173,7 @@ func change_target(move_up:int = 1, new_fighter_team: String = ""):
 			
 		current_target = {"index":fighter_index, "targets":new_targets, "team":fighter_team}
 
-func _unhandled_key_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
 		if event.is_action_pressed("select_previous") and select_mode:
 			change_target(-1)

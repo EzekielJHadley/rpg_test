@@ -7,6 +7,7 @@ var score: int = 0:
 		
 func _ready():
 	score = 0
+	$battle.grab_focus()
 
 func set_up(data: Dictionary):
 	var bonus_points = data.get("points", 0)
