@@ -23,6 +23,10 @@ func _process(delta: float) -> void:
 				word_delay += delta
 		else:
 			$choices.visible = true
+			
+		if get_viewport().gui_get_focus_owner() == null and $choices.get_child_count() > 0:
+			#God is this hacky, but i coudn't figure out how else to get a dynaimic button to be focused
+			$choices.get_children()[0].grab_focus()
 
 func clear():
 	for child in $choices.get_children():
@@ -51,6 +55,7 @@ func load_dialogue(text_packet: Dialogue):
 			choice.text = resp
 			choice.pressed.connect(func(): Event.emit("next_dialogue", {"choice": resp}))
 			$choices.add_child(choice)
+		
 	if len(text_responses) == 0:
 		end_conversation = true
 
@@ -63,4 +68,5 @@ func _input(event: InputEvent) -> void:
 		elif end_conversation:
 			print("Ending the conversation")
 			Event.emit("end_dialogue", {})
-			self.visible = false
+			self.visible = false  
+			get_viewport().set_input_as_handled()
