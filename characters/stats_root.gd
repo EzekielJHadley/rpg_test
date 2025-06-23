@@ -42,11 +42,14 @@ func _init(stats_file: String) -> void:
 func add_spell(new_spell: Magic):
 	spells_available[new_spell.name] = new_spell
 	
-func get_spell_list() -> Dictionary:
-	var spell_list: Dictionary = {}
-	for key in spells_available.keys():
-		spell_list[key] = (spells_available[key].cost < MP)
-	return spell_list
+
+func get_attacks() -> Dictionary:
+	var available_attacks = {}
+	available_attacks["Base_Attack"] = {"name": "Attack", "attack":null}
+	available_attacks["Magic"] = spells_available
+	available_attacks["available_mana"] = MP
+	
+	return available_attacks
 	
 func calculate_stats():
 	var aggregator = Stat_mod_aggregator.new({"HP_max":HP_base, "MP_max":MP_base,"STR":STR_base, "MGK":MGK_base})

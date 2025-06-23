@@ -106,3 +106,53 @@ dialogue object
 Dialogue  Object knows who is who from list of available characters given to the Conversation object by Scene
 	from the name text in the JSON it will find the first valid name_## from the list and use that
 
+
+
+store range and targets in damage_info
+	at turn start, pass a dictionary of all attacks to UI
+	UI parses and displays the options
+	upon clicking one it sends a Targeting signal to battle_root
+	battle_root determines who can be targeted and lets you cycle through those
+		if the list is empty kick it back down to player_turn to choose again (display error message?)
+	player chooses a target
+	battle_root calls player's attack option
+	animation plays and player sends Attack signal up to battle_root
+		the battle_root already has the attack info, so i wait for the animation to play
+		note: we could have it send a done signal before animation is done playing to trigger damage
+	battle_root applies attack to target(s)
+	
+	for AI:
+		AI selects the type of attack it wants to do
+		send Targeting signal to battle_root (or its own Event)
+		battle_root passes list of Targets to AI
+		AI selects Target(s), plays animation, and sends Attack signal up to battle_root
+		battle_root applies attack to Target(s)
+
+ALSO
+	make Event signal go to a Queue that is popped off and applied instead of automatic
+	
+	
+	
+	
+make class to manage positions
+	maintain a dictionary of characters and their location
+	and a dictionary of locations and a list of charcters in it
+	
+	6 positions
+		hero backline
+				hero territory
+		hero frontline
+		enemy frontline
+				enemy territory
+		enemy backline
+		
+		from hero territory hero backline/frontline and enemy frontline are close range, enemy backline is long range
+		and viceversa
+		neighboring zones are closerange, all others are long range
+		
+	
+	a method to move character from one slot to another
+	a method to check what slots are available to that character
+	
+	a method to get list of characters in a zone
+	a method to determine what zones are in range; close vs long range

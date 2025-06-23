@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb7mpuwqkt0l7"]
+[gd_scene load_steps=4 format=3 uid="uid://bb7mpuwqkt0l7"]
 
 [ext_resource type="Script" path="res://characters/character_root.gd" id="1_unk6p"]
 [ext_resource type="Texture2D" uid="uid://sjfqlc3nt0ch" path="res://resource/Sprites/border.bmp" id="2_qkktv"]
+[ext_resource type="PackedScene" uid="uid://cr1rqgfr5xtk4" path="res://UI/selector.tscn" id="3_uq6dk"]
 
 [node name="character_root" type="Sprite2D"]
 offset = Vector2(0, -64)
@@ -47,3 +48,6 @@ visible = false
 position = Vector2(0, -65)
 texture = ExtResource("2_qkktv")
 offset = Vector2(0, -64)
+
+[node name="Selector" parent="." instance=ExtResource("3_uq6dk")]
+visible = false
