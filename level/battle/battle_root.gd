@@ -216,6 +216,4 @@ func _unhandled_input(event: InputEvent) -> void:
 			select_mode = false
 			for target in current_target["targets"]:
 				target.show_selector(false)
-		elif event.is_action_pressed("ui_cancel"):
-			print("forcing a retargeting")
-			retarget()
+				
