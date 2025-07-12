@@ -1,0 +1,20 @@
+{
+	"_start": {
+		"speaker": "SPEAKER",
+		"dialogue": "I am down to half health. I also need to make this really really really long so i have more time to click the mouse button. I hope this works",
+		"responses": [
+			"Take That",
+			"By the moon and stars"
+		]
+	},
+	"Take That": {
+		"speaker": "Yellow",
+		"dialogue": "Take that you filthy vile despicable monster!",
+		"effect": {"targets":"SPEAKER", "attack":{"type": "fire", "dmg": 5, "status": []}}
+	},
+	"By the moon and stars": {
+		"speaker": "Hero",
+		"dialogue": "And now in the name of Moon I'll punish you!",
+		"effect": {"targets":"ALL_ALLIES", "attack":{"type": "light", "dmg": -5, "status": []}}
+	}
+}

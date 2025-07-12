@@ -7,6 +7,7 @@ var dialogue: String
 var responses: Dictionary
 var restrictions: Array
 var no_response: bool = false
+var effect: Dictionary
 
 func _init(dialogue_dict: Dictionary, speaker_portrait: String):
 	speaker = dialogue_dict.get("speaker", "")
@@ -15,6 +16,8 @@ func _init(dialogue_dict: Dictionary, speaker_portrait: String):
 	restrictions = dialogue_dict.get("when_flag", [])
 	for resp in dialogue_dict.get("responses", []):
 		responses[resp] = null
+		
+	effect = dialogue_dict.get("effect", {})
 
 func set_response(response: String, next_dialogue: Dialogue) -> void:
 	responses[response] = next_dialogue

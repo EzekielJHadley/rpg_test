@@ -9,6 +9,7 @@ var interupt: bool = false
 var interupt_signal:Signal
 var select_mode: bool = false
 var selected_attack: Dictionary
+var conv: Conversation
 
 func _ready() -> void:
 	add_players()
@@ -16,6 +17,7 @@ func _ready() -> void:
 	for fighter: Character in turn_order:
 		fighter.Event.connect(event_handler)
 	$Combat.Event.connect(event_handler)
+	$dialogue.Event.connect(event_handler)
 	battle_loop()
 
 func set_up(data: Dictionary):
@@ -86,10 +88,32 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 			character.visible = false
 			check_win_condition()
 			retarget()
-		"dialogue":
-			$Combat.display(event_type, data)
-			interupt_signal = $Combat.finished
+			for target in current_target["targets"]:
+				target.show_selector(false)
+#		"dialogue":
+#			$Combat.display(event_type, data)
+#			interupt_signal = $Combat.finished
+#			interupt = true
+		"start_dialogue", "dialogue":
+			interupt_signal = $dialogue.finished
 			interupt = true
+			conv = data["conversation"]
+			conv.set_speakers(character_list["Allies"], character_list["Enemies"], character.name)
+			conv.build_conversation()
+			var diag := conv.start_conversation()
+			print(diag.dialogue)
+			print(diag.get_responses())
+			$dialogue.load_dialogue(diag)
+		"next_dialogue":
+			print("Did that work?")
+			print("you chose: " + data["choice"])
+			var diag = conv.get_next_option(data["choice"])
+			#put effect here
+			$dialogue.load_dialogue(diag)
+		"end_dialogue":
+			print("end dialogue")
+			conv.end_conversation()
+			conv = null
 		_:
 			print("ERROR, should not get here")
 	#3) spawn helpers
@@ -192,3 +216,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			select_mode = false
 			for target in current_target["targets"]:
 				target.show_selector(false)
+		elif event.is_action_pressed("ui_cancel"):
+			print("forcing a retargeting")
+			retarget()

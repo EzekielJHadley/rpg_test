@@ -1,6 +1,6 @@
 {
     "_start":{
-        "speaker":"Guy",
+        "speaker":"SPEAKER",
         "dialogue":"Hello beautiful world!",
         "responses": ["Howdy", "Swords", "Secret"]
     },

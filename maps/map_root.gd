@@ -15,12 +15,12 @@ func _ready() -> void:
 		
 	
 	
-func event_handler(event_type: String, data: Dictionary):
+func event_handler(character: CharacterBody2D, event_type: String, data: Dictionary):
 	match event_type:
 		"start_dialogue":
 			get_tree().paused = true
 			conv = data["conversation"]
-			conv.set_speakers(PlayerTeam.team, get_tree().get_nodes_in_group("overworld_npc"))
+			conv.set_speakers(PlayerTeam.team.values(), get_tree().get_nodes_in_group("overworld_npc"), character.name)
 			conv.build_conversation()
 			var diag := conv.start_conversation()
 			print(diag.dialogue)
@@ -30,6 +30,7 @@ func event_handler(event_type: String, data: Dictionary):
 			print("Did that work?")
 			print("you chose: " + data["choice"])
 			var diag = conv.get_next_option(data["choice"])
+			#put effect here
 			$dialogue.load_dialogue(diag)
 		"end_dialogue":
 			print("end dialogue")

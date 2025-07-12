@@ -25,6 +25,8 @@ static func string_to_Dmg_type(type_str: String) -> int:
 			ret = Dmg_type.ICE
 		"poison":
 			ret = Dmg_type.POISON
+		"light":
+			ret = Dmg_type.LIGHT
 		_:
 			ret = Dmg_type.NONE
 
@@ -41,6 +43,8 @@ static func Dmg_type_to_string(element_val: Dmg_type) ->  String:
 			ret = "ice"
 		Dmg_type.POISON:
 			ret = "poison"
+		Dmg_type.LIGHT:
+			ret = "light"
 		_:
 			ret = "None"
 

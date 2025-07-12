@@ -4,7 +4,7 @@ class_name Stats
 signal health_update(new_hp)
 signal mana_update(new_mp)
 
-var character_name: String = ""
+var name: String = ""
 
 var HP_base: int
 var MP_base: int
@@ -101,7 +101,7 @@ func defend(incoming_attack: Damage_info):
 		passive.def_modifier(aggregator)
 	
 	var final_dmg = aggregator.calculate()
-	print(character_name + ": I'm taking: " + str(final_dmg.damage) + " " + Damage_info.Dmg_type_to_string(final_dmg.element) + " damage!")
+	print(name + ": I'm taking: " + str(final_dmg.damage) + " " + Damage_info.Dmg_type_to_string(final_dmg.element) + " damage!")
 	HP -= final_dmg.damage
 	
 func load_from_json(file_name: String):
@@ -111,7 +111,7 @@ func load_from_json(file_name: String):
 	var error = json.parse(json_text)
 	assert(error == OK)
 	var stats_value = json.data
-	character_name = stats_value.get("character_name", "NaN")
+	name = stats_value.get("character_name", "NaN")
   
 	HP_base = stats_value.get("HP_max", 10)
 	MP_base = stats_value.get("MP_max", 0)

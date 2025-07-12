@@ -15,7 +15,7 @@ func on_turn_start(character: Character):
 	character.add_child(effect_animation)
 	effect_animation.set_animation("res://resource/UI/poison_animation.bmp", 4, 2, 1)
 	effect_animation.add_behavior("modulate:a", 0, 2)
-	effect_animation.position.y -= character.texture.get_height()/2.0
+	effect_animation.position.y -= character.texture.get_height()/(2.0 * character.stats.sprite_height)
 	await effect_animation.run()
 	var poison = Damage_info.new(Damage_info.Dmg_type.POISON, 1, [])
 	character.take_dmg(poison)

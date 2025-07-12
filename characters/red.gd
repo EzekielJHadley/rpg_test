@@ -9,7 +9,7 @@ var stat_block : String
 func _ready():
 	instances += 1
 	stats = Stats.new(stat_block)
-	name = stats.character_name+str(instances)
+	name = stats.name+str(instances)
 	texture = load(stats.SPRITE)
 	hframes = stats.sprite_width
 	vframes = stats.sprite_height
