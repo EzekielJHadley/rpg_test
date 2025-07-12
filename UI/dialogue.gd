@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal Event(event_type: String, data: Dictionary)
+signal finished
 
 var current_dialogue: Dialogue
 var auto_continue: String = ""
@@ -39,6 +40,11 @@ func load_dialogue(text_packet: Dialogue):
 	$choices.visible = false
 	
 	current_dialogue = text_packet
+	
+	if current_dialogue.effect.has("targets"):
+		Event.emit(null, "attack", {"targets": current_dialogue.effect["targets"], "data":current_dialogue.effect["attack"]})
+		await get_tree().create_timer(1).timeout
+	
 	$dialogue_box/dialogue/text_box/conversation.text = text_packet.dialogue
 	$dialogue_box/dialogue/text_box/conversation.visible_characters = 0
 	$dialogue_box/dialogue/text_box/speaker.text = text_packet.speaker
@@ -53,7 +59,7 @@ func load_dialogue(text_packet: Dialogue):
 		else:
 			assert(auto_continue == "")
 			choice.text = resp
-			choice.pressed.connect(func(): Event.emit("next_dialogue", {"choice": resp}))
+			choice.pressed.connect(func(): Event.emit(null, "next_dialogue", {"choice": resp}))
 			$choices.add_child(choice)
 		
 	if len(text_responses) == 0:
@@ -64,9 +70,10 @@ func _input(event: InputEvent) -> void:
 		if $dialogue_box/dialogue/text_box/conversation.visible_ratio < 1.0:
 			$dialogue_box/dialogue/text_box/conversation.visible_ratio = 1
 		elif auto_continue != "":
-			Event.emit("next_dialogue", {"choice": auto_continue})
+			Event.emit(null, "next_dialogue", {"choice": auto_continue})
 		elif end_conversation:
 			print("Ending the conversation")
-			Event.emit("end_dialogue", {})
-			self.visible = false  
+			Event.emit(null, "end_dialogue", {})
+			self.visible = false
+			finished.emit()
 			get_viewport().set_input_as_handled()

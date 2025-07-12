@@ -4,9 +4,11 @@ class_name Character
 signal Event(character: Character, event_type: String, data: Dictionary)
 signal End_turn
 
+var PORTRAIT: String
 var stats: Stats:
 	set(value):
 		stats = value
+		PORTRAIT = stats.PORTRAIT
 		init_status_display()
 		stats.health_update.connect(update_health_bar)
 		stats.mana_update.connect(update_mana_bar)

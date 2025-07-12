@@ -24,8 +24,8 @@ func _ready() -> void:
 	add_team_member(yellow)
 
 func add_team_member(stat: Stats) -> void:
-	if stat.character_name not in available_characters:
-		available_characters[stat.character_name] = stat
+	if stat.name not in available_characters:
+		available_characters[stat.name] = stat
 	
-	if stat.character_name not in team:
-		team[stat.character_name] = stat
+	if stat.name not in team:
+		team[stat.name] = stat

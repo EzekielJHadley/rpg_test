@@ -7,4 +7,4 @@ var PORTRAIT: String = "res://resource/Sprites/red.png"
 
 func interact():
 	print("Hello world")
-	Event.emit("start_dialogue", {"conversation": Conversation.new("res://stats/conversations/hello_world.json")})
+	Event.emit(self, "start_dialogue", {"conversation": Conversation.new("res://stats/conversations/hello_world.json")})
