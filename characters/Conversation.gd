@@ -9,13 +9,8 @@ var targets: Dictionary
 
 var conversation_dict: Dictionary
 
-func _init(covnersation_json: String):
-	var json = JSON.new()
-	print(FileAccess.file_exists(covnersation_json))
-	var json_text = FileAccess.open(covnersation_json, FileAccess.READ).get_as_text()
-	var error = json.parse(json_text)
-	assert(error == OK)
-	conversation_dict = json.data
+func _init(conversation_in: Dictionary):
+	conversation_dict = conversation_in
 #	build_conversation(conversation_dict)
 	print("starting a conversation")
 	

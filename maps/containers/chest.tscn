@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://m0hqtpx3xyjo"]
+
+[ext_resource type="PackedScene" uid="uid://cnimvf88b0ilm" path="res://maps/containers/container_root.tscn" id="1_7c4lg"]
+[ext_resource type="Script" path="res://maps/containers/chest.gd" id="2_auuou"]
+[ext_resource type="Texture2D" uid="uid://bkpxtogtps0re" path="res://resource/Sprites/chests_32x32.png" id="2_jut62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxdu0"]
+size = Vector2(31, 28)
+
+[node name="Chest" instance=ExtResource("1_7c4lg")]
+collision_layer = 6
+script = ExtResource("2_auuou")
+type = 1
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_fxdu0")
+
+[node name="container_base" parent="." index="1"]
+texture = ExtResource("2_jut62")
+hframes = 3
+vframes = 5
+frame = 1

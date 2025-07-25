@@ -34,7 +34,13 @@ func compare_flag(flag_name: String, comp: String, value: int) -> bool:
 			return flag_value > value
 		_:
 			return false
-			
+
+func get_flag(flag_name: String) -> int:
+	if not flag_name in flags:
+		flags[flag_name] = 0
+	
+	return flags[flag_name]
+
 func set_flag(flag_name: String, val: int = 1) -> void:
 	flags[flag_name] = val
 	

@@ -7,7 +7,7 @@ var inventory: Inventory
 
 func _ready() -> void:
 	inventory = Inventory.new()
-	inventory.add_item(Antidote.new(), 5)
+	inventory.add_item(Antidote, 1)
 	
 	var hero = Stats.new("res://stats/player_characters/hero.json")
 	hero.add_spell(Ice_beam.new())

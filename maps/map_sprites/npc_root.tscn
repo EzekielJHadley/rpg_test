@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdh8q"]
 size = Vector2(16, 16)
 
-[node name="NPC_root" type="CharacterBody2D" groups=["overworld_npc"]]
+[node name="NPC_root" type="CharacterBody2D" groups=["interactable", "overworld_npc"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_a2phw")

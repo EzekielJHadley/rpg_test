@@ -9,18 +9,18 @@ func _ready() -> void:
 		print(doorway)
 		doorway.change_scene.connect(change_scene)
 	$dialogue.Event.connect(event_handler)
-	for interactable in $Interactables.get_children():
+	for interactable in get_tree().get_nodes_in_group("interactable"):
 		print(interactable)
 		interactable.Event.connect(event_handler)
 		
 	
 	
-func event_handler(character: CharacterBody2D, event_type: String, data: Dictionary):
+func event_handler(character, event_type: String, data: Dictionary):
 	match event_type:
 		"start_dialogue":
 			get_tree().paused = true
 			conv = data["conversation"]
-			conv.set_speakers(PlayerTeam.team.values(), get_tree().get_nodes_in_group("overworld_npc"), character.name)
+			conv.set_speakers(PlayerTeam.team.values(), get_tree().get_nodes_in_group("interactable"), character.name)
 			conv.build_conversation()
 			var diag := conv.start_conversation()
 			print(diag.dialogue)
