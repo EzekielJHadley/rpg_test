@@ -11,7 +11,8 @@ var effects: Array = []
 var dmg_type: Damage_info.Dmg_type = Damage_info.Dmg_type.NONE
 var dmg: int = 0
 
-func _init(damage_type: Damage_info.Dmg_type = Damage_info.Dmg_type.NONE, damage: int = 0, effects_str: Array = []):
+func _init(cons_name: String, damage_type: Damage_info.Dmg_type = Damage_info.Dmg_type.NONE, damage: int = 0, effects_str: Array = []):
+	name = cons_name
 	dmg_type = damage_type
 	dmg = damage
 	for effect_name in effects_str:
