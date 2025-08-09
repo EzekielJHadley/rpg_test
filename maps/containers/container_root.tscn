@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnimvf88b0ilm"]
+
+[ext_resource type="Script" path="res://maps/containers/container_root.gd" id="1_xu6qp"]
+
+[node name="container_root" type="StaticBody2D" groups=["interactable"]]
+script = ExtResource("1_xu6qp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="container_base" type="Sprite2D" parent="."]

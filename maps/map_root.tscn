@@ -2064,9 +2064,11 @@ zoom = Vector2(2, 2)
 
 [node name="door" type="Node2D" parent="." index="2"]
 
-[node name="Interactables" type="Node2D" parent="." index="3"]
+[node name="NPCs" type="Node2D" parent="." index="3"]
 
-[node name="dialogue" parent="." index="4" instance=ExtResource("9_0sxjn")]
+[node name="Containers" type="Node2D" parent="." index="4"]
+
+[node name="dialogue" parent="." index="5" instance=ExtResource("9_0sxjn")]
 process_mode = 3
 visible = false
 

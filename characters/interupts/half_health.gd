@@ -18,4 +18,5 @@ func is_triggered(stats: Stats) -> bool:
 	return false
 	
 func interupt_data() -> Dictionary:
-	return {"conversation":Conversation.new(dialogue)}
+	var conv = FileManager.load_json(dialogue)
+	return {"conversation":Conversation.new(conv)}
