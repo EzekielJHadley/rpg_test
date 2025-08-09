@@ -27,10 +27,8 @@ func interact():
 	if GameFlags.compare_flag(global_name, 'eq', STATE.CLOSED):
 		var msg: String = ""
 		for item: ItemSelect in items_contained:
-			var item_obj = item.load_item()
-#			msg += "%3dx %s\n" % [item.quantity, item_obj.name]
-			PlayerTeam.inventory.add_item(item_obj, item.quantity)
-			print(typeof(item_obj))
+			PlayerTeam.inventory.add_item(item.consumable_item, item.quantity)
+			msg += "%3dx %s\n" % [item.quantity, ConsumableGen.enum_to_string(item.consumable_item)]
 		display_dialogue["_start"]["dialogue"] = display_msg % msg
 		print(display_dialogue)
 		Event.emit(self, "start_dialogue", {"conversation": Conversation.new(display_dialogue)})

@@ -3,9 +3,10 @@ class_name Inventory
 
 
 var consumables: Dictionary = {}
-var items: Dictionary = {}
+var consumable_gen = ConsumableGen.new()
 
-func add_item(item, quantity: int = 1):
+func add_item(item_enum, quantity: int = 1):
+	var item = consumable_gen.generate(item_enum)
 	if item in consumables:
 		consumables[item] += quantity
 	else:
@@ -18,10 +19,3 @@ func use_item(item):
 	else:
 		print("Error!: Item does not exist or you are out of item.")
 		return Damage_info.new(0, 0, [])
-
-#func gen_item(script: String):
-#	var item_obj: Consumable = script.load_item()
-#	if item_obj.name in items:
-#		return item_obj
-#	else:
-#		items[item_obj.name] = item_obj

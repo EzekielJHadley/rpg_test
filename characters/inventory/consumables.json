@@ -1,0 +1,11 @@
+{
+	"Sm Potion": {
+		"dmg_type": "light",
+		"dmg": -5
+	},
+	"Antidote": {
+		"effects": [
+			"Cure Poison"
+		]
+	}
+}
