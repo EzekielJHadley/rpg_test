@@ -4,15 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://fiie551mac13" path="res://maps/scene_changer_area.tscn" id="2_nvud7"]
 [ext_resource type="PackedScene" uid="uid://cor2iaekyj0gd" path="res://maps/map_sprites/npc_root.tscn" id="3_lf85n"]
 [ext_resource type="PackedScene" uid="uid://m0hqtpx3xyjo" path="res://maps/containers/chest.tscn" id="4_1ac83"]
-[ext_resource type="Script" path="res://maps/containers/item_select.gd" id="5_88iyk"]
+[ext_resource type="Script" path="res://maps/containers/consumable_select.gd" id="5_x6ci4"]
 
-[sub_resource type="Resource" id="Resource_vi3v1"]
-script = ExtResource("5_88iyk")
+[sub_resource type="Resource" id="Resource_5trnh"]
+script = ExtResource("5_x6ci4")
 quantity = 5
 consumable_item = 0
 
-[sub_resource type="Resource" id="Resource_vp1f4"]
-script = ExtResource("5_88iyk")
+[sub_resource type="Resource" id="Resource_leg8j"]
+script = ExtResource("5_x6ci4")
 quantity = 1
 consumable_item = 1
 
@@ -32,7 +32,7 @@ level_name = "maps/map2"
 position = Vector2(778, 54)
 
 [node name="Chest" parent="Containers" index="0" instance=ExtResource("4_1ac83")]
-position = Vector2(541, 528)
-items_contained = Array[ExtResource("5_88iyk")]([SubResource("Resource_vi3v1"), SubResource("Resource_vp1f4")])
+position = Vector2(548, 520)
+consumables_contained = Array[ExtResource("5_x6ci4")]([SubResource("Resource_5trnh"), SubResource("Resource_leg8j")])
 
 [editable path="PCs/player2"]

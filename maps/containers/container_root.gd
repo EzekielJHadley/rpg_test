@@ -3,7 +3,7 @@ class_name ContainerRoot
 
 signal Event(character, event_type: String, data: Dictionary)
 	
-@export var items_contained: Array[ItemSelect] 
+@export var consumables_contained: Array[ConsumableSelect] 
 
 enum STATE {CLOSED = 0, OPEN}
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 func interact():
 	if GameFlags.compare_flag(global_name, 'eq', STATE.CLOSED):
 		var msg: String = ""
-		for item: ItemSelect in items_contained:
+		for item: ConsumableSelect in consumables_contained:
 			PlayerTeam.inventory.add_item(item.consumable_item, item.quantity)
 			msg += "%3dx %s\n" % [item.quantity, ConsumableGen.enum_to_string(item.consumable_item)]
 		display_dialogue["_start"]["dialogue"] = display_msg % msg

@@ -1,18 +1,15 @@
 extends RefCounted
 class_name ConsumableGen
 
-
+# When adding a new enum, the string's spaces will be replaced with underscore
+# the string will not be case sensative, see string_to_enum
 enum types {ANTIDOTE, SM_POTION}
 
 var item_cache = {}
 var item_defs = {}
 
 func _init():
-	var json = JSON.new()
-	var json_text = FileAccess.open("res://characters/inventory/consumables.json", FileAccess.READ).get_as_text()
-	var error = json.parse(json_text)
-	assert(error == OK)
-	var item_raw = json.data
+	var item_raw = FileManager.load_json("res://characters/inventory/consumables.json")
 	for item_name in item_raw:
 		var item_type = string_to_enum(item_name)
 		item_defs[item_type] = item_raw[item_name]
