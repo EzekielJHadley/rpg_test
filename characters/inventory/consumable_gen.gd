@@ -22,11 +22,12 @@ func generate(input_type: types):
 		if input_type in item_cache:
 			new_consumable = item_cache[input_type]
 		else:
+			var name = enum_to_string(input_type)
 			var dmg_type = item_defs[input_type].get("dmg_type", "none")
 			dmg_type = Damage_info.string_to_Dmg_type(dmg_type)
 			var dmg = item_defs[input_type].get("dmg", 0)
 			var effects = item_defs[input_type].get("effects", [])
-			new_consumable = Consumable.new(dmg_type, dmg, effects)
+			new_consumable = Consumable.new(name, dmg_type, dmg, effects)
 			item_cache[input_type] = new_consumable
 	else:
 		print("Consumable not found")
