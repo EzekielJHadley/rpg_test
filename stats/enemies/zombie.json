@@ -7,6 +7,7 @@
 	"MGK": 1,
 	"SPRITE": "res://resource/Sprites/PH_buffZombieMagenta.png",
 	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"MAP_SPRITE": "res://resource/Sprites/PH_buffZombieMagenta.png",
 	"sprite_width" : 8,
 	"sprite_height" : 4,
 	"Passives":[],

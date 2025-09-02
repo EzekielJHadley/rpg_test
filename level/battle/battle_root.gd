@@ -10,6 +10,8 @@ var interupt_signal:Signal
 var select_mode: bool = false
 var selected_attack: Dictionary
 var conv: Conversation
+var next_scene: String
+var data_fwd: Dictionary = {}
 
 func _ready() -> void:
 	add_players()
@@ -24,6 +26,10 @@ func set_up(data: Dictionary):
 	var enemies: Array = data["enemies"]
 	for enemy_scene in enemies:
 		add_enemy(enemy_scene)
+	next_scene = data.get("next_scene", "level/level_1")
+	for key in data:
+		if key != "next_scene":
+			data_fwd[key] = data[key]
 
 func battle_loop():
 	while true:
@@ -42,13 +48,14 @@ func check_win_condition():
 		#the level doesn't change fast enough, the loop will continue
 		interupt = true
 		interupt_signal = get_tree().create_timer(60).timeout
-		change_level.emit("level_1", {"points":20}, false)
+		data_fwd["points"] = 20
+		change_level.emit(next_scene, data_fwd, false)
 	elif num_fighters["Allies"] <= 0:
 		print("Heros LOSE!")
 		#the level doesn't change fast enough, the loop will continue
 		interupt = true
 		interupt_signal = get_tree().create_timer(60).timeout
-		change_level.emit("level_1", {}, false)
+		change_level.emit(next_scene, data_fwd, false)
 		
 
 
@@ -212,8 +219,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action_pressed("ui_accept") and select_mode:
 			for fighter_target in current_target["targets"]: 
 				print("attacking: " + fighter_target.name)
-			await current_char.attack(current_target["targets"], selected_attack)
 			select_mode = false
 			for target in current_target["targets"]:
 				target.show_selector(false)
+			await current_char.attack(current_target["targets"], selected_attack)
 				
