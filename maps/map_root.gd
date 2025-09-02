@@ -41,5 +41,11 @@ func event_handler(character, event_type: String, data: Dictionary):
 			
 
 func set_up(data: Dictionary):
+	print("Setting up map_root")
+	print(data)
 	if data.has("door"):
 		$PCs/player1.position = get_node("door/" + data["door"]).position
+	elif data.has("map_sprite"):
+		var sprite = get_node("enemies/" + data["map_sprite"])
+		sprite.dead()
+		$PCs/player1.position = sprite.global_position + Vector2(0,100)

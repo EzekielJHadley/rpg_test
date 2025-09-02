@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://cyjbhnjbbgs3"]
+[gd_scene load_steps=9 format=4 uid="uid://cyjbhnjbbgs3"]
 
 [ext_resource type="PackedScene" uid="uid://d16hordh3k35b" path="res://maps/map_root.tscn" id="1_rgwlc"]
 [ext_resource type="PackedScene" uid="uid://fiie551mac13" path="res://maps/scene_changer_area.tscn" id="2_nvud7"]
 [ext_resource type="PackedScene" uid="uid://cor2iaekyj0gd" path="res://maps/map_sprites/npc_root.tscn" id="3_lf85n"]
 [ext_resource type="PackedScene" uid="uid://m0hqtpx3xyjo" path="res://maps/containers/chest.tscn" id="4_1ac83"]
 [ext_resource type="Script" path="res://maps/containers/consumable_select.gd" id="5_x6ci4"]
+[ext_resource type="PackedScene" uid="uid://df8xrj7yjb3ck" path="res://maps/scene_changer_enemy.tscn" id="6_u1i4s"]
 
 [sub_resource type="Resource" id="Resource_5trnh"]
 script = ExtResource("5_x6ci4")
@@ -27,6 +28,10 @@ position = Vector2(260, 548)
 [node name="exit1" parent="door" index="0" instance=ExtResource("2_nvud7")]
 position = Vector2(1183, 727)
 level_name = "maps/map2"
+
+[node name="slime_girl" parent="enemies" index="0" instance=ExtResource("6_u1i4s")]
+position = Vector2(83, 476)
+enemies = Array[int]([0])
 
 [node name="Guy" parent="NPCs" index="0" instance=ExtResource("3_lf85n")]
 position = Vector2(778, 54)

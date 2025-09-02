@@ -4,3 +4,4 @@
 
 [node name="scene_changer" type="Node2D" groups=["doors"]]
 script = ExtResource("1_oita7")
+data = {}
