@@ -219,8 +219,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.is_action_pressed("ui_accept") and select_mode:
 			for fighter_target in current_target["targets"]: 
 				print("attacking: " + fighter_target.name)
-			await current_char.attack(current_target["targets"], selected_attack)
 			select_mode = false
 			for target in current_target["targets"]:
 				target.show_selector(false)
+			await current_char.attack(current_target["targets"], selected_attack)
 				
