@@ -6,5 +6,5 @@
 	"MGK": 2,
 	"SPRITE": "res://resource/Sprites/red.png",
 	"PORTRAIT": "res://resource/Sprites/red.png",
-	"Passives":["aspect_of_fire"],
+	"Passives":["Aspect Of Fire"],
 }

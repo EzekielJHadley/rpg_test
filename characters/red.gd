@@ -8,7 +8,9 @@ var stat_block : String
 
 func _ready():
 	instances += 1
-	stats = Stats.new(stat_block)
+	var new_stats = Stats.new()
+	new_stats.load_from_json(stat_block)
+	stats = new_stats
 	name = stats.name+str(instances)
 	texture = load(stats.SPRITE)
 	hframes = stats.sprite_width

@@ -46,3 +46,9 @@ func set_flag(flag_name: String, val: int = 1) -> void:
 	
 func unset_flag(flag_name: String) -> void:
 	set_flag(flag_name, 0)
+	
+func export_flags():
+	return flags
+	
+func import_flags(new_flags: Dictionary):
+	flags = new_flags

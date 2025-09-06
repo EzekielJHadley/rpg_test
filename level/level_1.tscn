@@ -63,7 +63,15 @@ focus_neighbor_top = NodePath("../battle")
 text = "Map"
 level_name = "maps/map1"
 
+[node name="load" type="Button" parent="." index="4"]
+offset_left = 729.0
+offset_top = 486.0
+offset_right = 869.0
+offset_bottom = 529.0
+text = "Load"
+
 [connection signal="pressed" from="VBoxContainer/increment" to="." method="increment_button"]
 [connection signal="change_scene" from="scene2_test" to="." method="change_scene"]
 [connection signal="change_scene" from="battle" to="." method="change_scene"]
 [connection signal="change_scene" from="map" to="." method="change_scene"]
+[connection signal="pressed" from="load" to="." method="_on_load_pressed"]

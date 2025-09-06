@@ -1,7 +1,7 @@
 extends RefCounted
 class_name Consumable
 
-static var name
+var name
 
 var inv_icon = "res://resource/Sprites/icon.svg"
 var map_sprite = "res://resource/Sprites/icon.svg"

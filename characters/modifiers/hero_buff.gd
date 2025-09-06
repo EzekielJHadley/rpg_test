@@ -1,7 +1,9 @@
 extends Modifiers
+class_name HeroBuff
 
 
 func _init():
+	name = "Hero Buff"
 	stat_mods.append({"stat":"STR", "operator":Mod_calculator.ADDITIVE, "modifier":1})
 
 func on_turn_start(character: Character):

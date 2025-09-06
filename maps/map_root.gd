@@ -9,6 +9,7 @@ func _ready() -> void:
 		print(doorway)
 		doorway.change_scene.connect(change_scene)
 	$dialogue.Event.connect(event_handler)
+	$Map_menu.save_game.connect(save_game)
 	for interactable in get_tree().get_nodes_in_group("interactable"):
 		print(interactable)
 		interactable.Event.connect(event_handler)
@@ -48,4 +49,17 @@ func set_up(data: Dictionary):
 	elif data.has("map_sprite"):
 		var sprite = get_node("enemies/" + data["map_sprite"])
 		sprite.dead()
-		$PCs/player1.position = sprite.global_position + Vector2(0,100)
+		$PCs/player1.position = sprite.global_position
+	elif data.has("position"):
+		$PCs/player1.position = Vector2(data["position"]["x"], data["position"]["y"])
+		
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("menu"):
+		$Map_menu.visible = true
+		get_tree().paused = true
+		
+func save_game():
+	var level_name = scene_file_path.replace("res://", "").replace(".tscn", "")
+	var save_state = { "position":{"x": $PCs/player1.position.x, "y": $PCs/player1.position.y}}
+	FileManager.save_game(level_name, save_state)
+	
