@@ -35,12 +35,11 @@ var sprite_width: int
 var sprite_height: int
 var PORTRAIT: String
 
-func _init(stats_file: String) -> void:
+func _init() -> void:
 	modifiers = Char_mods.new()
-	load_from_json(stats_file)
 
-func add_spell(new_spell: Magic):
-	spells_available[new_spell.name] = new_spell
+func add_spell(new_spell: SpellGen.types):
+	spells_available[SpellGen.enum_to_string(new_spell)] = SpellGen.generate(new_spell)
 	
 
 func get_attacks() -> Dictionary:
@@ -105,12 +104,15 @@ func defend(incoming_attack: Damage_info):
 	HP -= final_dmg.damage
 	
 func load_from_json(file_name: String):
-	var json = JSON.new()
-	print(FileAccess.file_exists(file_name))
-	var json_text = FileAccess.open(file_name, FileAccess.READ).get_as_text()
-	var error = json.parse(json_text)
-	assert(error == OK)
-	var stats_value = json.data
+#	var json = JSON.new()
+#	print(FileAccess.file_exists(file_name))
+#	var json_text = FileAccess.open(file_name, FileAccess.READ).get_as_text()
+#	var error = json.parse(json_text)
+#	assert(error == OK)
+#	var stats_value = json.data
+	load_from_dict(FileManager.load_json(file_name))
+	
+func load_from_dict(stats_value: Dictionary):
 	name = stats_value.get("character_name", "NaN")
   
 	HP_base = stats_value.get("HP_max", 10)
@@ -128,8 +130,35 @@ func load_from_json(file_name: String):
 
 	#passives
 	for skill_name in stats_value.get("Passives", []):
-		var skill = load("res://characters/modifiers/" + skill_name + ".gd").new()
+		var skill_type = ModifierGen.string_to_enum(skill_name)
+		var skill = ModifierGen.generate(skill_type)
 		modifiers.add_mod(skill)
+		
+	for spell_name in stats_value.get("Spells", []):
+		var spell_type = SpellGen.string_to_enum(spell_name)
+		add_spell(spell_type)
 
 	
 	calculate_stats()
+
+func export_values():
+	var out = {}
+	out["character_name"] = name
+	out["HP_max"] = HP_base  
+	out["MP_max"] = MP_base  
+	out["STR"] = STR_base
+	out["SPD"] = SPD_base
+	out["MGK"] = MGK_base
+	out["SPRITE"] = SPRITE
+	out["sprite_width"] = sprite_width
+	out["sprite_height"] = sprite_height
+	out["PORTRAIT"] = PORTRAIT
+	out["Passives"] = modifiers.export_passives()
+	out["Spells"] = spells_available.keys()
+	
+	return out
+
+func import_values(new_stats: Dictionary):
+	spells_available = {}
+	modifiers = Char_mods.new()
+	load_from_dict(new_stats)

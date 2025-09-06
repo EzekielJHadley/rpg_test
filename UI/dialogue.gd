@@ -43,7 +43,6 @@ func load_dialogue(text_packet: Dialogue):
 	
 	if current_dialogue.effect.has("targets"):
 		Event.emit(null, "attack", {"targets": current_dialogue.effect["targets"], "data":current_dialogue.effect["attack"]})
-		#await get_tree().create_timer(1).timeout
 	
 	$dialogue_box/dialogue/text_box/conversation.text = text_packet.dialogue
 	$dialogue_box/dialogue/text_box/conversation.visible_characters = 0

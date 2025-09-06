@@ -3,6 +3,7 @@ class_name Modifiers
 
 #signal mod_animation_start
 
+var name: String
 #contains dicts with "stat to modify" "how to modify value" and "how much to modify it"
 var stat_mods: Array = []
 #contains dicts with "attk type" "how to modify dmg" and "how much to modify it"

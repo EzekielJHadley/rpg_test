@@ -38,3 +38,11 @@ func cure(effect_type: String):
 	effect_type = effect_type.to_upper()
 	if effect_type in status_effects and status_effects[effect_type] != null:
 		status_effects[effect_type].remove()
+
+
+func export_passives():
+	var out = []
+	for passive in passive_mods:
+		out.append(passive.name)
+		
+	return out

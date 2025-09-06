@@ -9,5 +9,5 @@
 	"PORTRAIT": "res://resource/Sprites/icon.svg",
 	"sprite_width" : 2,
 	"sprite_height" : 2,
-	"Passives":["hero_buff"],
+	"Passives":["Hero Buff"],
 }

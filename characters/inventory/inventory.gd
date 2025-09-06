@@ -19,3 +19,17 @@ func use_item(item):
 	else:
 		print("Error!: Item does not exist or you are out of item.")
 		return Damage_info.new(0, 0, [])
+
+func export_items():
+	var out = {}
+	
+	for item in consumables.keys():
+		out[item.name] = consumables[item]
+		
+	return out
+
+func import_items(new_items: Dictionary):
+	consumables = {}
+	for item in new_items.keys():
+		var item_type = consumable_gen.string_to_enum(item)
+		add_item(item_type, new_items[item])
