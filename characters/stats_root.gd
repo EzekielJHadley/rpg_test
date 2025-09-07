@@ -28,6 +28,7 @@ var MGK: int
 
 var spells_available: Dictionary = {}
 var modifiers: Char_mods
+var interrupts: Array
 
 
 var SPRITE: String
@@ -137,6 +138,9 @@ func load_from_dict(stats_value: Dictionary):
 	for spell_name in stats_value.get("Spells", []):
 		var spell_type = SpellGen.string_to_enum(spell_name)
 		add_spell(spell_type)
+		
+	interrupts = stats_value.get("Interrupts", [])
+		
 
 	
 	calculate_stats()
@@ -155,6 +159,7 @@ func export_values():
 	out["PORTRAIT"] = PORTRAIT
 	out["Passives"] = modifiers.export_passives()
 	out["Spells"] = spells_available.keys()
+	out["Interrupts"] = interrupts
 	
 	return out
 

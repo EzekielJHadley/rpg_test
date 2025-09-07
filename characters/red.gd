@@ -25,6 +25,10 @@ func _ready():
 	$StatusDisplay.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE )
 	$StatusDisplay.position.y = 20
 	#$StatusDisplay.set_size(Vector2(texture.get_width()/hframes, 20))
+	for interrupt in stats.interrupts:
+		var interrupt_type = InterruptGen.string_to_enum(interrupt)
+		var new_interrupt = InterruptGen.generate(interrupt_type)
+		$interrupts.add_child(new_interrupt)
 	
 
 func _exit_tree() -> void:

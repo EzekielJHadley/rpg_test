@@ -32,14 +32,18 @@ func set_speakers(players: Array, npcs: Array, speaker: String):
 func _get_attack(attack_info: Dictionary):
 	var dmg_type = Damage_info.string_to_Dmg_type(attack_info["type"]) 
 	return Damage_info.new(dmg_type, attack_info["dmg"], attack_info["status"])
+	
+func _update_effects(effect:Dictionary):
+	if effect.has("attack"):
+		effect["attack"]["targets"] = targets[effect["attack"]["targets"]]
+		effect["attack"]["attack"] = _get_attack(effect["attack"]["attack"])
 
 func build_conversation():
 	var start: Dictionary =  conversation_dict["_start"]
 	if start["speaker"] == "SPEAKER":
 		start["speaker"] = initial_speaker
 	if start.has("effect"):
-		start["effect"]["targets"] = targets[start["effect"]["targets"]]
-		start["effect"]["attack"] = _get_attack(start["effect"]["attack"])
+		_update_effects(start["effect"])
 	dialogue_start =  Dialogue.new(start, speakers.get(start["speaker"], "res://resource/Sprites/icon.svg"))
 	current_dialogue = dialogue_start
 	var existing_dialogue: Dictionary = {"start":current_dialogue}
@@ -54,8 +58,7 @@ func build_conversation():
 					if conversation_dict[choice]["speaker"] == "SPEAKER":
 						conversation_dict[choice]["speaker"] = initial_speaker
 					if conversation_dict[choice].has("effect"):
-						conversation_dict[choice]["effect"]["targets"] = targets[conversation_dict[choice]["effect"]["targets"]]
-						conversation_dict[choice]["effect"]["attack"] = _get_attack(conversation_dict[choice]["effect"]["attack"])
+						_update_effects(conversation_dict[choice]["effect"])
 					var new_dialogue = Dialogue.new(conversation_dict[choice], speakers[conversation_dict[choice]["speaker"]])
 					working_dialogue.set_response(choice, new_dialogue)
 					existing_dialogue[choice] = new_dialogue

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmowqwaubvyax"]
+
+[ext_resource type="PackedScene" uid="uid://ck1bn5ntg2vbo" path="res://characters/interrupts/interrupt.tscn" id="1_5bdj8"]
+[ext_resource type="Script" path="res://characters/interrupts/half_health.gd" id="2_h67ws"]
+
+[node name="Half_health" instance=ExtResource("1_5bdj8")]
+script = ExtResource("2_h67ws")

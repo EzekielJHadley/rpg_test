@@ -3,7 +3,8 @@ extends CanvasLayer
 signal save_game
 
 func _on_visibility_changed():
-	$menu/resume.grab_focus()
+	if is_inside_tree():
+		$menu/resume.grab_focus()
 
 func _on_resume_pressed():
 	visible = false

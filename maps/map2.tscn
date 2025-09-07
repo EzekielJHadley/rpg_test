@@ -21,6 +21,6 @@ level_name = "maps/map1"
 
 [node name="boss_goat" parent="enemies" index="0" instance=ExtResource("3_sal2x")]
 position = Vector2(568, 334)
-enemies = Array[int]([2, 0, 1])
+enemies = Array[int]([4, 0, 3])
 
 [editable path="PCs/player2"]

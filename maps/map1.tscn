@@ -31,7 +31,7 @@ level_name = "maps/map2"
 
 [node name="slime_girl" parent="enemies" index="0" instance=ExtResource("6_u1i4s")]
 position = Vector2(83, 476)
-enemies = Array[int]([0])
+enemies = Array[int]([1])
 
 [node name="Guy" parent="NPCs" index="0" instance=ExtResource("3_lf85n")]
 position = Vector2(778, 54)

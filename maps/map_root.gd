@@ -38,7 +38,6 @@ func event_handler(character, event_type: String, data: Dictionary):
 			conv.end_conversation()
 			conv = null
 			get_tree().paused = false
-			GameFlags.set_flag("flag_test")
 			
 
 func set_up(data: Dictionary):

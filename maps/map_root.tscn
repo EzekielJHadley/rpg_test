@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bhpojtablvsfg" path="res://maps/map_sprites/player_character.tscn" id="6_74mxt"]
 [ext_resource type="Texture2D" uid="uid://cbqgu5af5yf5i" path="res://resource/Sprites/4-sample-alt.png" id="8_saq1p"]
 [ext_resource type="PackedScene" uid="uid://d0nd5bbxlewkp" path="res://UI/dialogue.tscn" id="9_0sxjn"]
-[ext_resource type="PackedScene" uid="uid://b3ebd2hvlhpaw" path="res://maps/map_menu.tscn" id="10_bkpj0"]
+[ext_resource type="PackedScene" uid="uid://cq2fl6vrsofke" path="res://maps/map_menu.tscn" id="10_bkpj0"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_y46ex"]
 tile_data = PackedInt32Array(65536, 851968, 13, 131072, 851968, 14, 1, 917504, 12, 65537, 917504, 13, 131073, 917504, 14, 2, 983040, 12, 65538, 983040, 13, 131074, 983040, 14)

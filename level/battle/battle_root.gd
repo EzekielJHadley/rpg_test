@@ -5,8 +5,8 @@ var current_target: Dictionary = {"index":0, "targets":[], "team":"Enemies"}
 var character_list: Dictionary = {"Allies":[], "Enemies":[]}
 var turn_order: Array = []
 var num_fighters: Dictionary = {"Allies":0, "Enemies":0}
-var interupt: bool = false
-var interupt_signal:Signal
+var interrupt: bool = false
+var interrupt_signal:Signal
 var select_mode: bool = false
 var selected_attack: Dictionary
 var conv: Conversation
@@ -34,9 +34,9 @@ func set_up(data: Dictionary):
 func battle_loop():
 	while true:
 		for fighter: Character in turn_order:
-			if interupt:
-				await interupt_signal
-				interupt = false
+			if interrupt:
+				await interrupt_signal
+				interrupt = false
 			if fighter.is_alive():
 				fighter.start_turn(character_list)
 				await fighter.End_turn
@@ -46,15 +46,15 @@ func check_win_condition():
 	if num_fighters["Enemies"] <= 0:
 		print("Heroes WIN!")
 		#the level doesn't change fast enough, the loop will continue
-		interupt = true
-		interupt_signal = get_tree().create_timer(60).timeout
+		interrupt = true
+		interrupt_signal = get_tree().create_timer(60).timeout
 		data_fwd["points"] = 20
 		change_level.emit(next_scene, data_fwd, false)
 	elif num_fighters["Allies"] <= 0:
 		print("Heros LOSE!")
 		#the level doesn't change fast enough, the loop will continue
-		interupt = true
-		interupt_signal = get_tree().create_timer(60).timeout
+		interrupt = true
+		interrupt_signal = get_tree().create_timer(60).timeout
 		change_level.emit(next_scene, data_fwd, false)
 		
 
@@ -99,11 +99,11 @@ func event_handler(character: Character, event_type: String, data: Dictionary):
 				target.show_selector(false)
 #		"dialogue":
 #			$Combat.display(event_type, data)
-#			interupt_signal = $Combat.finished
-#			interupt = true
+#			interrupt_signal = $Combat.finished
+#			interrupt = true
 		"start_dialogue", "dialogue":
-			interupt_signal = $dialogue.finished
-			interupt = true
+			interrupt_signal = $dialogue.finished
+			interrupt = true
 			conv = data["conversation"]
 			conv.set_speakers(character_list["Allies"], character_list["Enemies"], character.name)
 			conv.build_conversation()

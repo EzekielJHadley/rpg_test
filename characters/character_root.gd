@@ -95,11 +95,11 @@ func take_dmg(attk: Damage_info):
 		Event.emit(self, "dead", {})
 		return
 	
-	for inter: Interupt in $interupts.get_children():
+	for inter: Interrupt in $interrupts.get_children():
 		if inter.is_triggered(stats):
-			print("triggered interupt: " + inter.name)
-			var inter_type = inter.interupt_type()
-			var inter_data = inter.interupt_data()
+			print("triggered interrupt: " + inter.name)
+			var inter_type = inter.interrupt_type()
+			var inter_data = inter.interrupt_data()
 			Event.emit(self, inter_type, inter_data)
 		
 func character_dead():

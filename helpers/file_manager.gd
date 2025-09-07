@@ -13,8 +13,7 @@ static func load_json(input_file: String) -> Dictionary:
 
 static func save_dict(file_name: String, data: Dictionary):
 	var save_file = FileAccess.open(file_name, FileAccess.WRITE)
-	var json = JSON.new()
-	var json_text = json.stringify(data, "\t")
+	var json_text = JSON.stringify(data, "\t")
 	save_file.store_string(json_text)
 
 static func save_game(level_name: String, level_data: Dictionary):

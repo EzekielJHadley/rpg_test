@@ -41,7 +41,7 @@ show_percentage = false
 layout_mode = 2
 columns = 4
 
-[node name="interupts" type="Node2D" parent="."]
+[node name="interrupts" type="Node2D" parent="."]
 
 [node name="Border" type="Sprite2D" parent="."]
 visible = false

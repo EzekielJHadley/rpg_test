@@ -41,8 +41,9 @@ func load_dialogue(text_packet: Dialogue):
 	
 	current_dialogue = text_packet
 	
-	if current_dialogue.effect.has("targets"):
-		Event.emit(null, "attack", {"targets": current_dialogue.effect["targets"], "data":current_dialogue.effect["attack"]})
+	if current_dialogue.effect.has("attack"):
+		var attack = current_dialogue.effect["attack"]
+		Event.emit(null, "attack", {"targets": attack["targets"], "data":attack["attack"]})
 	
 	$dialogue_box/dialogue/text_box/conversation.text = text_packet.dialogue
 	$dialogue_box/dialogue/text_box/conversation.visible_characters = 0
