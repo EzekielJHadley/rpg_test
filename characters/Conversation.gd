@@ -68,10 +68,7 @@ func build_conversation():
 func end_conversation():
 	print("ending conversation")
 	dialogue_start.remove()		
-	
 
-func add_character_list(characters):
-	pass
 
 func start_conversation() -> Dialogue:
 	return current_dialogue

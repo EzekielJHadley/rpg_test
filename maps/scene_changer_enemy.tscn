@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://maps/scene_changer_enemy.gd" id="2_jqwm4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cx4ad"]
-size = Vector2(200, 134)
+size = Vector2(85, 85)
 
 [node name="scene_changer_enemy" instance=ExtResource("1_wsiku")]
 script = ExtResource("2_jqwm4")

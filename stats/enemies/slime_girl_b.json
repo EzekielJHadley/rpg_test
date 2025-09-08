@@ -11,5 +11,5 @@
 	"sprite_width" : 8,
 	"sprite_height" : 5,
 	"Passives":[],
-	"Interrupts":["Half Health"]
+	"Interrupts":[]
 }
