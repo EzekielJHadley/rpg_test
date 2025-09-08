@@ -4,7 +4,7 @@ class_name SceneChanger
 signal change_scene(level_name: String, data: Dictionary, scene_persist: bool)
 
 @export var level_name: String
-@export var data: Dictionary
+@export var data: Dictionary = {}
 @export var scene_persist: bool
 
 var is_shown: bool = true
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 	

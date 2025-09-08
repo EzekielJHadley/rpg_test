@@ -1,0 +1,15 @@
+{
+	"character_name":"Slime girl",
+	"HP_max": 10,
+	"MP_max": 10,
+	"STR": 2,
+	"SPD":3,
+	"MGK": 4,
+	"SPRITE": "res://resource/Sprites/PH_slimeGirlBlue.png",
+	"PORTRAIT": "res://resource/Sprites/icon.svg",
+	"MAP_SPRITE": "res://resource/Sprites/PH_slimeGirlBlue.png",
+	"sprite_width" : 8,
+	"sprite_height" : 5,
+	"Passives":[],
+	"Interrupts":[]
+}

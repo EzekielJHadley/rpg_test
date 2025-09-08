@@ -10,11 +10,29 @@
 	"Take That": {
 		"speaker": "Yellow",
 		"dialogue": "Take that you filthy vile despicable monster!",
-		"effect": {"targets":"SPEAKER", "attack":{"type": "fire", "dmg": 5, "status": []}}
+		"effect": {
+			"attack": {
+				"targets": "SPEAKER",
+				"attack": {
+					"type": "fire",
+					"dmg": 5,
+					"status": []
+				}
+			}
+		}
 	},
 	"By the moon and stars": {
 		"speaker": "Hero",
 		"dialogue": "And now in the name of Moon I'll punish you!",
-		"effect": {"targets":"ALL_ALLIES", "attack":{"type": "light", "dmg": -5, "status": []}}
+		"effect": {
+			"attack": {
+				"targets": "ALL_ALLIES",
+				"attack": {
+					"type": "light",
+					"dmg": -5,
+					"status": []
+				}
+			}
+		}
 	}
 }

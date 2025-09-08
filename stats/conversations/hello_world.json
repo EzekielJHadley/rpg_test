@@ -11,7 +11,12 @@
     "Swords":{
         "speaker":"Yellow",
         "dialogue": "I like swords!",
-        "responses": ["_start"]
+        "responses": ["_start"],
+        "effect": {
+            "set_flags": {
+                "flag_test": 1
+            }
+        }
     },
     "Secret":{
         "speaker":"Hero",

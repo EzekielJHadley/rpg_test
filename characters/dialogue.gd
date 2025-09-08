@@ -35,8 +35,16 @@ func get_valid_responses() -> Array:
 			valid_responses.append(response)
 	return valid_responses
 
+func trigger_effect():
+	if "set_flags" in effect:
+		for flag in effect["set_flags"].keys():
+			GameFlags.set_flag(flag, effect["set_flags"][flag])
+
 func get_response(response: String = "") -> Dialogue:
-	return responses.get(response, null)
+	var resp = responses.get(response, null)
+	if resp != null:
+		resp.trigger_effect()
+	return resp
 	
 func is_available() -> bool:
 	var ret = true

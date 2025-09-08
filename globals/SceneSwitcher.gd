@@ -19,8 +19,10 @@ func change_level(level_name: String, data: Dictionary, level_persist: bool):
 	if level_persist:
 		var scene_path = current_scene.scene_file_path.replace("res://", "").replace(".tscn", "")
 		old_scene[scene_path] = current_scene
-	add_child(next_level)
-	remove_child(current_scene)
+	call_deferred("add_child", next_level)
+#	add_child(next_level)
+	call_deferred("remove_child", current_scene)
+#	remove_child(current_scene)
 	current_scene = next_level
 	if not current_scene.is_connected("change_level", change_level):
 		current_scene.connect("change_level", change_level)

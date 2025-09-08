@@ -16,7 +16,7 @@ var keep_away = 40
 
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not follower:
 		velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * SPEED
 #		if Input.is_action_pressed("move_left"):

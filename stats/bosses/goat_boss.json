@@ -10,5 +10,6 @@
 	"MAP_SPRITE": "res://resource/Sprites/PH_goatMidBoss.png",
 	"sprite_width": 8,
 	"sprite_height": 4,
-	"Passives": []
+	"Passives": [],
+	"Interrupts":["Half Health"]
 }

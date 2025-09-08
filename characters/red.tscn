@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://1guet2jx28q8"]
+[gd_scene load_steps=3 format=3 uid="uid://1guet2jx28q8"]
 
 [ext_resource type="PackedScene" uid="uid://bb7mpuwqkt0l7" path="res://characters/character_root.tscn" id="1_7qkc8"]
 [ext_resource type="Script" path="res://characters/red.gd" id="3_htn2r"]
-[ext_resource type="PackedScene" uid="uid://cmowqwaubvyax" path="res://characters/interupts/half_health.tscn" id="4_tw23a"]
 
 [node name="Red" instance=ExtResource("1_7qkc8")]
 script = ExtResource("3_htn2r")
-
-[node name="Half_health" parent="interupts" index="0" instance=ExtResource("4_tw23a")]

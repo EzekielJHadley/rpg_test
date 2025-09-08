@@ -31,5 +31,5 @@ func export_items():
 func import_items(new_items: Dictionary):
 	consumables = {}
 	for item in new_items.keys():
-		var item_type = consumable_gen.string_to_enum(item)
+		var item_type = ConsumableGen.string_to_enum(item)
 		add_item(item_type, new_items[item])
